@@ -4,10 +4,9 @@ var  timer = 0.0
 var  timer_change = 1
 
 var speed = 0
-
 var dir = Vector2()
-
 var orient = 0
+var dragged = false
 
 func _ready():
 	
@@ -18,7 +17,7 @@ func _ready():
 	
 	speed = rand_range(0.3, 1.0)
 	
-	orient = rand_range(0,2*PI)
+	orient = rand_range(0, 2 * PI)
 	
 	dir = Vector2(sin(orient), cos(orient))
 
