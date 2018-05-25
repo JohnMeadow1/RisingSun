@@ -9,9 +9,10 @@ func _ready():
 	pass
 
 func _process(delta):
-	timer += delta *2 * timer_change
-	if timer > 1 or timer < -1:
-		timer = clamp( timer, -1, 1 )
-		timer_change = -timer_change
-		
-	$Sprite.position.x += timer
+#	timer += delta *2 * timer_change
+#	if timer > 1 or timer < -1:
+#		timer = clamp( timer, -1, 1 )
+#		timer_change = -timer_change
+#
+#	$Sprite.position.x += timer
+	pass
