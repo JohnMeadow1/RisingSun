@@ -12,6 +12,6 @@ func _process(delta):
 	rotation += delta;
 	alpha = -sin(rotation)
 	alpha = clamp(alpha * 2, 0, 1)
-	$sky.modulate = Color(1,1,1, 1-alpha);
+	$"../../sky".modulate = Color(1,1,1, 1-alpha);
 	
 	pass
