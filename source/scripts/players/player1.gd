@@ -23,7 +23,7 @@ func _ready():
 	if PLAYER_NUM == 3:
 		$Sprite2.modulate = Color(0,0,1,1)
 	
-func _process(delta):
+func _physics_process(delta):
 	#
 	# Move inputs
 	#
@@ -31,20 +31,20 @@ func _process(delta):
 	var offset = MOVE_SPEED * delta
 	var is_moving = false
 	
-	if Input.is_action_pressed("move_up_p" + str(PLAYER_NUM)) and position.y > 0:
+	if Input.is_action_pressed("move_up_p" + str(PLAYER_NUM)): # and position.y > 0:
 		move.y  -= offset;
 		is_moving = true
 
-	if Input.is_action_pressed("move_down_p" + str(PLAYER_NUM)) and position.y < get_viewport_rect().size.y:
+	if Input.is_action_pressed("move_down_p" + str(PLAYER_NUM)): # and position.y < get_viewport_rect().size.y:
 		move.y  += offset;
 		is_moving = true
 
-	if Input.is_action_pressed("move_left_p" + str(PLAYER_NUM)) and position.x > 0:
+	if Input.is_action_pressed("move_left_p" + str(PLAYER_NUM)): # and position.x > 0:
 		move.x  -= offset;
 		is_moving = true
 		$Sprite.flip_h = true
 
-	if Input.is_action_pressed("move_right_p" + str(PLAYER_NUM)) and position.x < get_viewport_rect().size.x:
+	if Input.is_action_pressed("move_right_p" + str(PLAYER_NUM)):# and position.x < get_viewport_rect().size.x:
 		move.x  += offset;
 		is_moving = true
 		$Sprite.flip_h = false 
