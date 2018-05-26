@@ -19,10 +19,13 @@ var cleanup_time = 0
 func _ready():
 	randomize()
 	cleanup_time = rand_range(10,15)
+	
+	# Randomize gender
 	if randi()%2:
 		$Sprite.set_texture(texture1)
 	else:
 		$Sprite.set_texture(texture2)
+		
 	# Move AI
 	self.walk_timer = Timer.new()
 	self.walk_timer.set_one_shot(true)
@@ -33,13 +36,13 @@ func _ready():
 	self.add_child(self.idle_timer)
 	
 	initialize_random_position()
-
 	
 	# Init behavior
 	if randi() % 2:
 		self.randomize_move()
 	else:
 		self.randomize_idle()
+		
 func initialize_random_position():
 	var point = $"../../spawn_points".get_child(randi()%$"../../spawn_points".get_children().size()).position
 	
@@ -125,7 +128,7 @@ func _physics_process(delta):
 				
 				game.add_points(1)
 				
-			if randi() %15:
+			if randi() % 15:
 				var new_blood = blood_object.instance()
 				new_blood.rotation = rand_range(0,2*PI)
 				new_blood.position = position
@@ -136,7 +139,8 @@ func _physics_process(delta):
 		#######################################################
 		STATE_DEAD:
 			dying_timer+=delta
-			$Sprite.modulate = Color(1,1,1,1-((dying_timer*5)/cleanup_time-4))
+			$Sprite.modulate = Color(1,1,1,1-((clamp(dying_timer, cleanup_time - 2, cleanup_time) - (cleanup_time - 2))/2))
+			
 			if dying_timer>cleanup_time:
 				queue_free()
 

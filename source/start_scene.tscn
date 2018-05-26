@@ -1,17 +1,20 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://images/start.png" type="Texture" id=1]
 [ext_resource path="res://images/start_pressed.png" type="Texture" id=2]
-[ext_resource path="res://scripts/start_scene.gd" type="Script" id=3]
-[ext_resource path="res://images/exit.png" type="Texture" id=4]
-[ext_resource path="res://images/exit_pressed.png" type="Texture" id=5]
-[ext_resource path="res://scripts/exit.gd" type="Script" id=6]
-[ext_resource path="res://images/fire_anim.png" type="Texture" id=7]
-[ext_resource path="res://images/background1.png" type="Texture" id=8]
-[ext_resource path="res://images/title.png" type="Texture" id=9]
-[ext_resource path="res://images/credits.png" type="Texture" id=10]
-[ext_resource path="res://images/credits_pressed.png" type="Texture" id=11]
-[ext_resource path="res://scripts/credits.gd" type="Script" id=12]
+[ext_resource path="res://images/start_active.png" type="Texture" id=3]
+[ext_resource path="res://scripts/start_scene.gd" type="Script" id=4]
+[ext_resource path="res://images/exit.png" type="Texture" id=5]
+[ext_resource path="res://images/exit_pressed.png" type="Texture" id=6]
+[ext_resource path="res://images/exit_active.png" type="Texture" id=7]
+[ext_resource path="res://scripts/exit.gd" type="Script" id=8]
+[ext_resource path="res://images/fire_anim.png" type="Texture" id=9]
+[ext_resource path="res://images/background1.png" type="Texture" id=10]
+[ext_resource path="res://images/title.png" type="Texture" id=11]
+[ext_resource path="res://images/credits.png" type="Texture" id=12]
+[ext_resource path="res://images/credits_pressed.png" type="Texture" id=13]
+[ext_resource path="res://images/credits_active.png" type="Texture" id=14]
+[ext_resource path="res://scripts/credits.gd" type="Script" id=15]
 
 [sub_resource type="Animation" id=1]
 
@@ -32,7 +35,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[node name="TextureButton" type="TextureButton" index="0"]
+[node name="TextureButton" type="TextureButton"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -55,8 +58,9 @@ shortcut = null
 group = null
 texture_normal = ExtResource( 1 )
 texture_pressed = ExtResource( 2 )
-script = ExtResource( 3 )
-_sections_unfolded = [ "Textures" ]
+texture_focused = ExtResource( 3 )
+script = ExtResource( 4 )
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Pause", "Rect", "Size Flags", "Textures", "Theme", "Visibility" ]
 
 [node name="TextureButton" type="TextureButton" parent="." index="0"]
 
@@ -79,16 +83,17 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 5 )
-script = ExtResource( 6 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+texture_focused = ExtResource( 7 )
+script = ExtResource( 8 )
 _sections_unfolded = [ "Textures" ]
 
 [node name="fire_anim" type="Sprite" parent="." index="1"]
 
 position = Vector2( 205.395, 78.5265 )
 scale = Vector2( 2.90604, 2.77808 )
-texture = ExtResource( 7 )
+texture = ExtResource( 9 )
 hframes = 3
 frame = 2
 _sections_unfolded = [ "Animation" ]
@@ -109,13 +114,13 @@ modulate = Color( 0.695313, 0.0516052, 0.0516052, 1 )
 show_behind_parent = true
 position = Vector2( 200.727, 115.416 )
 scale = Vector2( 2.99865, 3.33642 )
-texture = ExtResource( 8 )
+texture = ExtResource( 10 )
 _sections_unfolded = [ "Visibility" ]
 
 [node name="title" type="Sprite" parent="." index="3"]
 
 position = Vector2( 190.151, -303.79 )
-texture = ExtResource( 9 )
+texture = ExtResource( 11 )
 
 [node name="TextureButton2" type="TextureButton" parent="." index="4"]
 
@@ -139,14 +144,27 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 10 )
-texture_pressed = ExtResource( 11 )
-script = ExtResource( 12 )
-_sections_unfolded = [ "Textures", "Visibility" ]
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 13 )
+texture_focused = ExtResource( 14 )
+script = ExtResource( 15 )
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Pause", "Rect", "Size Flags", "Textures", "Theme", "Visibility" ]
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 
 [connection signal="pressed" from="." to="." method="_pressed"]
 
+[connection signal="mouse_entered" from="TextureButton" to="TextureButton" method="_on_mouse_entered"]
+
+[connection signal="mouse_exited" from="TextureButton" to="TextureButton" method="_on_mouse_exited"]
+
 [connection signal="pressed" from="TextureButton" to="TextureButton" method="_pressed"]
+
+[connection signal="mouse_entered" from="TextureButton2" to="TextureButton2" method="_on_mouse_entered"]
+
+[connection signal="mouse_exited" from="TextureButton2" to="TextureButton2" method="_on_mouse_exited"]
 
 [connection signal="pressed" from="TextureButton2" to="TextureButton2" method="_pressed"]
 

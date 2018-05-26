@@ -114,7 +114,7 @@ radius = 3.0
 audio_stream = ExtResource( 6 )
 random_pitch = 1.4
 
-[node name="player" type="KinematicBody2D" index="0"]
+[node name="player" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 2

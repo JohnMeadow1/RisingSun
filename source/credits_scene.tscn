@@ -1,19 +1,20 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://images/back.png" type="Texture" id=1]
 [ext_resource path="res://images/back_pressed.png" type="Texture" id=2]
-[ext_resource path="res://scripts/back.gd" type="Script" id=3]
-[ext_resource path="res://images/background1.png" type="Texture" id=4]
-[ext_resource path="res://fonts/Fairfax.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://images/fire_anim.png" type="Texture" id=6]
-[ext_resource path="res://images/leszek.png" type="Texture" id=7]
+[ext_resource path="res://images/back_active.png" type="Texture" id=3]
+[ext_resource path="res://scripts/back.gd" type="Script" id=4]
+[ext_resource path="res://images/background1.png" type="Texture" id=5]
+[ext_resource path="res://fonts/Fairfax.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://images/fire_anim.png" type="Texture" id=7]
+[ext_resource path="res://images/leszek.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 
 size = 13
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 5 )
+font_data = ExtResource( 6 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=2]
@@ -21,7 +22,7 @@ _sections_unfolded = [ "Font", "Settings" ]
 size = 13
 use_mipmaps = true
 use_filter = false
-font_data = ExtResource( 5 )
+font_data = ExtResource( 6 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="Animation" id=3]
@@ -42,7 +43,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[node name="TextureButton" type="TextureButton" index="0"]
+[node name="TextureButton" type="TextureButton"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -65,7 +66,8 @@ shortcut = null
 group = null
 texture_normal = ExtResource( 1 )
 texture_pressed = ExtResource( 2 )
-script = ExtResource( 3 )
+texture_focused = ExtResource( 3 )
+script = ExtResource( 4 )
 _sections_unfolded = [ "Textures" ]
 
 [node name="background1" type="Sprite" parent="." index="0"]
@@ -74,7 +76,7 @@ modulate = Color( 0.203776, 0.0335693, 0.429688, 1 )
 show_behind_parent = true
 position = Vector2( -453.084, -357.948 )
 scale = Vector2( 3.00494, 3.33417 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 _sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Visibility" ]
 
 [node name="Label2" type="Label" parent="." index="1"]
@@ -171,7 +173,7 @@ _sections_unfolded = [ "Rect", "custom_fonts" ]
 
 position = Vector2( -449.109, -397.132 )
 scale = Vector2( 2.95236, 2.7646 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 hframes = 3
 frame = 2
 _sections_unfolded = [ "Animation" ]
@@ -198,7 +200,7 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 position = Vector2( 591.559, 424.061 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 _sections_unfolded = [ "Transform" ]
 
 [connection signal="pressed" from="." to="." method="_pressed"]
