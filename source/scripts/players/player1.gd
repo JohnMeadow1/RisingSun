@@ -33,6 +33,9 @@ func _physics_process(delta):
 	# Move inputs
 	#
 	
+	if Input.is_action_pressed("ui_cancel"):
+		get_tree().change_scene("res://escape_menu.tscn")
+	
 	# Fight 
 	if Input.is_action_pressed("alt_p" + str(PLAYER_NUM)):
 		self.state = STATE_FIGHT
