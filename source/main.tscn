@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/no_player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/fire_anim.tscn" type="PackedScene" id=8]
 
-[node name="main" type="Node2D" index="0"]
+[node name="main" type="Node2D"]
 
 scale = Vector2( 3, 3 )
 script = ExtResource( 1 )
@@ -28,7 +28,7 @@ __meta__ = {
 [node name="Sun" parent="background" index="0" instance=ExtResource( 2 )]
 
 position = Vector2( 200.979, 139.351 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
 
 [node name="background" type="Sprite" parent="background" index="1"]
 
@@ -96,6 +96,7 @@ __meta__ = {
 
 [node name="foreground" type="Node2D" parent="." index="1"]
 
+editor/display_folded = true
 _sections_unfolded = [ "Visibility" ]
 __meta__ = {
 "_edit_group_": true,
@@ -122,6 +123,7 @@ PLAYER_NUM = 3
 
 [node name="items" type="Node2D" parent="foreground" index="3"]
 
+editor/display_folded = true
 script = ExtResource( 6 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
@@ -170,6 +172,8 @@ __meta__ = {
 [node name="npc20" parent="foreground/items" index="19" instance=ExtResource( 7 )]
 
 [node name="spawn_points" type="Node2D" parent="foreground" index="4"]
+
+editor/display_folded = true
 
 [node name="Node2D" type="Node2D" parent="foreground/spawn_points" index="0"]
 
