@@ -28,7 +28,7 @@ func _ready():
 	if PLAYER_NUM == 3:
 		$Sprite2.modulate = Color(0,0,1,1)
 	
-func _process(delta):
+func _physics_process(delta):
 	#
 	# Move inputs
 	#
