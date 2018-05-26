@@ -10,8 +10,13 @@ func _ready():
 	pass
 
 func _process(delta):
-	
 	pass
 
 func _pressed():
 	get_tree().quit()
+	
+func _on_mouse_entered():
+	self.grab_focus()
+
+func _on_mouse_exited():
+	self.release_focus()

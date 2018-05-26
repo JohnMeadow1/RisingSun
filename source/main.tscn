@@ -52,7 +52,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Angle", "Angular Velocity", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Scale", "Spread", "Trail" ]
 
-[node name="main" type="Node2D" index="0"]
+[node name="main" type="Node2D"]
 
 scale = Vector2( 3, 3 )
 script = ExtResource( 1 )

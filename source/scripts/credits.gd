@@ -16,3 +16,9 @@ func _ready():
 
 func _pressed():
 	get_tree().change_scene("res://credits_scene.tscn")
+
+func _on_mouse_entered():
+	self.grab_focus()
+
+func _on_mouse_exited():
+	self.release_focus()
