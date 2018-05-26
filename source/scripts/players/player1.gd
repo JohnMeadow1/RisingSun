@@ -9,10 +9,11 @@ const MOVE_SPEED  = 200
 
 export(int) var PLAYER_NUM
 
-enum {STATE_WALK, STATE_IDLE, STATE_FIGHT}
-
+enum {STATE_WALK, STATE_IDLE, STATE_FIGHT, STATE_STABING}
 var drag_item = null
 var state = null
+var stab_timer = 1
+var samples_played = 0
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -32,12 +33,12 @@ func _physics_process(delta):
 	#
 	# Move inputs
 	#
-	
+	var move = Vector2()
 	# Fight 
 	if Input.is_action_pressed("alt_p" + str(PLAYER_NUM)):
 		self.state = STATE_FIGHT
 	else:
-		var move = Vector2()
+
 		var offset = MOVE_SPEED * delta
 		var player_moved = false
 		
@@ -61,12 +62,10 @@ func _physics_process(delta):
 			$Sprite.flip_h = false 
 			$Sprite2.flip_h = false
 	
-		if player_moved:
+		if player_moved and self.state != STATE_STABING:
 			self.state = STATE_WALK
-		else:
+		elif self.state != STATE_STABING:
 			self.state = STATE_IDLE
-
-		move_and_slide(move * 100)
 	
 	#
 	# Others
@@ -77,12 +76,37 @@ func _physics_process(delta):
 		STATE_WALK:
 			if $AnimationPlayer.current_animation != "walk":
 				$AnimationPlayer.play("walk")
+
 		STATE_IDLE:
 			if $AnimationPlayer.current_animation != "idle":
 				$AnimationPlayer.play("idle")
+#				move_and_slide(move * 100)
 		STATE_FIGHT:
 			if $AnimationPlayer.current_animation != "kill":
 				$AnimationPlayer.play("kill")
+#				move_and_slide(move * 100)
+		STATE_STABING:
+#			get_node("stab"+str(randi()%4+1)).play()
+			stab_timer -= delta
+			if stab_timer <= 0:
+				stab_timer = 1
+				self.state = STATE_IDLE
+				samples_played = 0
+			elif stab_timer <0.2 and samples_played == 2:
+				samples_played += 1
+				get_node("stab"+str(randi()%4+1)).play()
+			elif stab_timer <0.5 and samples_played == 1 :
+				samples_played +=1
+				get_node("stab"+str(randi()%4+1)).play()
+			elif stab_timer <0.8 and samples_played == 0 :
+				samples_played +=1
+				get_node("stab"+str(randi()%4+1)).play()
+		
+
+	move_and_slide(move * 100)
+
+#			if $AnimationPlayer.current_animation != "kill":
+#				$AnimationPlayer.play("kill")
 	
 	# Pick item on the floor
 	if Input.is_action_just_pressed("use_p" + str(PLAYER_NUM)):
@@ -103,6 +127,11 @@ func _physics_process(delta):
 			
 			self.drag_item = null
 			get_node("dropAudioStreamPlayer2D").play()
+			if position.x < $"../killzone".position.x +30 and position.x > $"../killzone".position.x -30 and position.y < $"../killzone".position.y +30 and position.y > $"../killzone".position.y -30:
+				self.state = STATE_STABING
+				$draw.play()
+				$AnimationPlayer.play("kill")
+				samples_played = 0
 				
 	# Update position of picked item
 	if self.drag_item != null:
