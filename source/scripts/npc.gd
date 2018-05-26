@@ -11,11 +11,16 @@ var dragged = false
 var state = STATE_IDLE
 var dying_timer = 1
 
-var blood_object = load("res://scenes/blood.tscn")
+var blood_object = preload("res://scenes/blood.tscn")
+var texture1 = preload("res://images/npc.png")
+var texture2 = preload("res://images/npc2.png")
 
 func _ready():
 	randomize()
-	
+	if randi()%2:
+		$Sprite.set_texture(texture1)
+	else:
+		$Sprite.set_texture(texture2)
 	# Move AI
 	self.walk_timer = Timer.new()
 	self.walk_timer.set_one_shot(true)
