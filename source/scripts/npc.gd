@@ -52,7 +52,7 @@ func randomize_move():
 	dir = Vector2(sin(orient), cos(orient))
 
 func randomize_idle():
-	$Sprite/AnimationPlayer.play("prey")
+	$Sprite/AnimationPlayer.play("idle")
 	self.state = STATE_IDLE
 	
 	# Timer	
@@ -67,6 +67,7 @@ func drag(flag):
 	else:
 		if position.x < $"../../killzone".position.x +30 and position.x > $"../../killzone".position.x -30 and position.y < $"../../killzone".position.y +30 and position.y > $"../../killzone".position.y -30:
 			self.state = STATE_DYING
+			$sacrificeAudioStreamPlayer2D.play()
 		else:
 			randomize_move()
 
@@ -107,12 +108,12 @@ func _physics_process(delta):
 				# NPC Dead
 				self.state = STATE_DEAD
 				$CollisionShape2D.disabled = true
-			
+				$Sprite/AnimationPlayer.play("dead")
 				if randi()%2:
 					$Sprite.flip_v = true
 				else:
 					$Sprite.flip_v = false
-				$Sprite/AnimationPlayer.play("dead")
+					
 				rotation = PI/2
 				
 				game.add_points(1)
@@ -128,3 +129,5 @@ func _physics_process(delta):
 		#######################################################
 		STATE_DEAD:
 			pass
+			
+			
