@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/sky.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scripts/spawner.gd" type="Script" id=8]
 [ext_resource path="res://scenes/no_player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/fire_anim.tscn" type="PackedScene" id=10]
+[ext_resource path="res://sounds/bg-music-383063__reasanka__ukulele-loop-with-vocals-by-rea.wav" type="AudioStream" id=11]
 
 [sub_resource type="ParticlesMaterial" id=1]
 
@@ -284,5 +285,15 @@ scale = Vector2( 3, 3 )
 [node name="fire_anim" parent="." index="2" instance=ExtResource( 10 )]
 
 position = Vector2( 199.911, 171.072 )
+
+[node name="bgAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="3"]
+
+stream = ExtResource( 11 )
+volume_db = 0.0
+autoplay = true
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
 
 
