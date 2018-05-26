@@ -61,14 +61,19 @@ func _process(delta):
 	# Pick item on the floor
 	if Input.is_action_just_pressed("use_p" + str(PLAYER_NUM)):
 		if self.drag_item == null:
-			# Hands empty - drag item
+			# Hands empty - drag item			
 			for item in $"../items".get_children():
 				if ( (item.position - position).length() < 30 ) and ( item.dragged == false):
-					item.dragged = true
+					item.drag(true)
+					item.rotation = PI/2;
+					
 					self.drag_item = item
+					break
 		else:
-			# Hands occupied - left item
-			self.drag_item.dragged = false
+			# Hands occupied - left item			
+			self.drag_item.drag(false)
+			self.drag_item.rotation = 0
+			
 			self.drag_item = null
 				
 	# Update position of picked item
