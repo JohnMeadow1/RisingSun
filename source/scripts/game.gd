@@ -20,8 +20,9 @@ func get_sun_pos():
 	return (self.points / POINTS_TO_HORIZON)
 	
 func get_num_of_days():
-	self.days = fmod(self.points, 4.0)
-	print(self.days)
+	self.days = self.points / 40
+#	print(self.days)
+	return floor(self.days)
 
 func _process(delta):
 	sun_set_timer -= delta
