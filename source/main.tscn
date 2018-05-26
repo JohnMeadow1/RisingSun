@@ -70,10 +70,12 @@ __meta__ = {
 
 [node name="Sun" parent="background" index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 200.979, 139.351 )
+position = Vector2( 201.596, 139.968 )
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
 
-[node name="clouds" type="Particles2D" parent="background" index="1"]
+[node name="Node2D" type="Node2D" parent="background" index="1"]
+
+[node name="clouds" type="Particles2D" parent="background/Node2D" index="0"]
 
 position = Vector2( 489.894, 48.8154 )
 rotation = -3.14159
@@ -97,7 +99,7 @@ h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Process Material", "Textures", "Time", "Transform", "Visibility" ]
 
-[node name="clouds2" type="Particles2D" parent="background" index="2"]
+[node name="clouds2" type="Particles2D" parent="background/Node2D" index="1"]
 
 position = Vector2( 493.16, 51.0875 )
 rotation = -3.14159
@@ -121,7 +123,7 @@ h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Process Material", "Textures", "Time", "Transform", "Visibility" ]
 
-[node name="background" type="Sprite" parent="background" index="3"]
+[node name="background" type="Sprite" parent="background/Node2D" index="2"]
 
 position = Vector2( 0, 33 )
 texture = ExtResource( 5 )
@@ -131,7 +133,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="temple" type="Sprite" parent="background" index="4"]
+[node name="temple" type="Sprite" parent="background/Node2D" index="3"]
 
 position = Vector2( 200.122, 173.804 )
 texture = ExtResource( 6 )
@@ -139,8 +141,10 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="background" index="5"]
+[node name="StaticBody2D" type="StaticBody2D" parent="background" index="2"]
 
+editor/display_folded = true
+visible = false
 input_pickable = false
 collision_layer = 3
 collision_mask = 3
@@ -185,9 +189,27 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="foreground" type="Node2D" parent="." index="1"]
+[node name="blood_collisions" type="StaticBody2D" parent="background" index="3"]
 
 editor/display_folded = true
+input_pickable = false
+collision_layer = 4
+collision_mask = 4
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="background/blood_collisions" index="0"]
+
+build_mode = 1
+polygon = PoolVector2Array( 80.8227, 109.675, -1.91044, 105.243, -5.97322, -21.4423, 412.124, -18.4875, 408.431, 102.288, 325.329, 109.306, 235.578, 63.8762, 172.42, 66.0923 )
+
+[node name="blood_pool" type="Node2D" parent="background" index="4"]
+
+[node name="foreground" type="Node2D" parent="." index="1"]
+
 _sections_unfolded = [ "Visibility" ]
 __meta__ = {
 "_edit_group_": true,
@@ -261,7 +283,11 @@ __meta__ = {
 
 [node name="npc20" parent="foreground/items" index="19" instance=ExtResource( 9 )]
 
-[node name="spawn_points" type="Node2D" parent="foreground" index="4"]
+[node name="killzone" type="Node2D" parent="foreground" index="4"]
+
+position = Vector2( 202, 87.3334 )
+
+[node name="spawn_points" type="Node2D" parent="foreground" index="5"]
 
 editor/display_folded = true
 

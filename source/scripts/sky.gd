@@ -26,8 +26,8 @@ func _process(delta):
 	var local_color = Color( 0.22*(1-alpha) +alpha, 0.25*(1-alpha) +alpha, 0.8*(1-alpha) +alpha, 1 )
 
 	$"../../foreground".modulate = local_color
-	$"../background".modulate   = local_color
-	$"../temple".modulate       = local_color
-	$"../clouds".modulate       = local_color
-	$"../clouds2".modulate      = local_color
+	$"../Node2D".modulate   = local_color
+#	$"../temple".modulate       = local_color
+#	$"../clouds".modulate       = local_color
+#	$"../clouds2".modulate      = local_color
 	pass
