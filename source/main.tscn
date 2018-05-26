@@ -35,8 +35,8 @@ PLAYER_NUM = 3
 
 [node name="npc2" parent="items" index="1" instance=ExtResource( 3 )]
 
-[node name="npc3" parent="items" index="2" instance=ExtResource( 3 )]
+[node name="npc12" parent="items" index="2" instance=ExtResource( 3 )]
 
-[node name="npc4" parent="items" index="3" instance=ExtResource( 3 )]
+[node name="npc13" parent="items" index="3" instance=ExtResource( 3 )]
 
 
