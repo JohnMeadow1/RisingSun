@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://images/back.png" type="Texture" id=1]
 [ext_resource path="res://images/back_pressed.png" type="Texture" id=2]
@@ -7,7 +7,11 @@
 [ext_resource path="res://images/background1.png" type="Texture" id=5]
 [ext_resource path="res://fonts/Fairfax.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://images/fire_anim.png" type="Texture" id=7]
-[ext_resource path="res://images/leszek.png" type="Texture" id=8]
+[ext_resource path="res://images/piotr.png" type="Texture" id=8]
+[ext_resource path="res://images/paulina.png" type="Texture" id=9]
+[ext_resource path="res://images/natalia.png" type="Texture" id=10]
+[ext_resource path="res://images/leszek.png" type="Texture" id=11]
+[ext_resource path="res://images/maciej.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -43,7 +47,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[node name="TextureButton" type="TextureButton"]
+[node name="TextureButton" type="TextureButton" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -85,10 +89,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -257.0
-margin_top = -796.0
-margin_right = -136.0
-margin_bottom = -646.0
+margin_left = -262.0
+margin_top = -779.0
+margin_right = -141.0
+margin_bottom = -629.0
 rect_scale = Vector2( 3, 3 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -117,10 +121,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -573.0
-margin_top = -588.0
-margin_right = -492.0
-margin_bottom = -568.0
+margin_left = -559.0
+margin_top = -583.0
+margin_right = -478.0
+margin_bottom = -563.0
 rect_scale = Vector2( 3, 3 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -141,10 +145,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -997.0
-margin_top = -806.0
-margin_right = -871.0
-margin_bottom = -644.0
+margin_left = -975.0
+margin_top = -808.0
+margin_right = -849.0
+margin_bottom = -646.0
 rect_scale = Vector2( 3, 3 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -196,11 +200,39 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="leszek" type="Sprite" parent="CanvasLayer" index="0"]
+[node name="piotr" type="Sprite" parent="." index="6"]
 
-position = Vector2( 591.559, 424.061 )
+position = Vector2( -771.036, -642.796 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 8 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="paulina" type="Sprite" parent="." index="7"]
+
+position = Vector2( -127.402, -232.799 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 9 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="natalia" type="Sprite" parent="." index="8"]
+
+position = Vector2( -143.982, -650.333 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="leszek" type="Sprite" parent="." index="9"]
+
+position = Vector2( -448.465, -433.276 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 11 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="maciej" type="Sprite" parent="." index="10"]
+
+position = Vector2( -777.065, -238.829 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 12 )
 _sections_unfolded = [ "Transform" ]
 
 [connection signal="pressed" from="." to="." method="_pressed"]
