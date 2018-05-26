@@ -52,7 +52,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Angle", "Angular Velocity", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Scale", "Spread", "Trail" ]
 
-[node name="main" type="Node2D"]
+[node name="main" type="Node2D" index="0"]
 
 scale = Vector2( 3, 3 )
 script = ExtResource( 1 )
@@ -74,6 +74,8 @@ position = Vector2( 201.596, 139.968 )
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
 
 [node name="Node2D" type="Node2D" parent="background" index="1"]
+
+editor/display_folded = true
 
 [node name="clouds" type="Particles2D" parent="background/Node2D" index="0"]
 
@@ -144,7 +146,6 @@ __meta__ = {
 [node name="StaticBody2D" type="StaticBody2D" parent="background" index="2"]
 
 editor/display_folded = true
-visible = false
 input_pickable = false
 collision_layer = 3
 collision_mask = 3
@@ -236,6 +237,7 @@ PLAYER_NUM = 3
 
 [node name="items" type="Node2D" parent="foreground" index="3"]
 
+editor/display_folded = true
 script = ExtResource( 8 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {

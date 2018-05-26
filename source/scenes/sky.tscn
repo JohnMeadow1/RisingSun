@@ -23,7 +23,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="sun" type="Sprite" parent="." index="2"]
 
-position = Vector2( 150, 0 )
+position = Vector2( -150, 0 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 hframes = 2

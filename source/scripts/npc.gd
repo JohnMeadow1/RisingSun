@@ -99,9 +99,12 @@ func _physics_process(delta):
 					$Sprite.flip_h = false 
 				else:
 					$Sprite.flip_h = true
+		#######################################################
 		STATE_DYING:
 			dying_timer -= delta
+			
 			if dying_timer <=0:
+				# NPC Dead
 				self.state = STATE_DEAD
 				$CollisionShape2D.disabled = true
 			
@@ -112,8 +115,9 @@ func _physics_process(delta):
 				$Sprite/AnimationPlayer.play("dead")
 				rotation = PI/2
 				
-			if randi() %10:
+				game.add_points(1)
 				
+			if randi() %10:
 				var new_blood = blood_object.instance()
 				new_blood.rotation = rand_range(0,2*PI)
 				new_blood.position = position
@@ -121,5 +125,6 @@ func _physics_process(delta):
 				new_blood.linear_velocity = Vector2(rand_range(-50,50),rand_range(-10,50))
 				
 				$"../../../background/blood_pool".add_child(new_blood)
+		#######################################################
 		STATE_DEAD:
 			pass
