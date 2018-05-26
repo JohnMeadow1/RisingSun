@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/players/player1.gd" type="Script" id=1]
 [ext_resource path="res://images/shaman2.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://sounds/stab-02.wav" type="AudioStream" id=8]
 [ext_resource path="res://sounds/stab-03.wav" type="AudioStream" id=9]
 [ext_resource path="res://sounds/stab-04.wav" type="AudioStream" id=10]
+[ext_resource path="res://sounds/steps-429796__camilo-vargas13__pasos-gallo.wav" type="AudioStream" id=11]
 
 [sub_resource type="Animation" id=1]
 
@@ -196,7 +197,7 @@ volume_db = 0.0
 autoplay = false
 max_distance = 2000.0
 attenuation = 1.0
-bus = "stabing"
+bus = "Master"
 area_mask = 1
 
 [node name="stab2" type="AudioStreamPlayer2D" parent="." index="8"]
@@ -206,7 +207,7 @@ volume_db = 0.0
 autoplay = false
 max_distance = 2000.0
 attenuation = 1.0
-bus = "stabing"
+bus = "Master"
 area_mask = 1
 
 [node name="stab3" type="AudioStreamPlayer2D" parent="." index="9"]
@@ -216,7 +217,7 @@ volume_db = -12.63
 autoplay = false
 max_distance = 2000.0
 attenuation = 1.0
-bus = "stabing"
+bus = "Master"
 area_mask = 1
 
 [node name="stab4" type="AudioStreamPlayer2D" parent="." index="10"]
@@ -226,7 +227,17 @@ volume_db = 0.0
 autoplay = true
 max_distance = 2000.0
 attenuation = 1.0
-bus = "stabing"
+bus = "Master"
+area_mask = 1
+
+[node name="stepsAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="11"]
+
+stream = ExtResource( 11 )
+volume_db = 0.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
 area_mask = 1
 
 

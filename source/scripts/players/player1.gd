@@ -79,17 +79,21 @@ func _physics_process(delta):
 		STATE_WALK:
 			if $AnimationPlayer.current_animation != "walk":
 				$AnimationPlayer.play("walk")
+				$stepsAudioStreamPlayer2D.play()
 
 		STATE_IDLE:
 			if $AnimationPlayer.current_animation != "idle":
 				$AnimationPlayer.play("idle")
+				$stepsAudioStreamPlayer2D.stop()
 #				move_and_slide(move * 100)
 		STATE_FIGHT:
 			if $AnimationPlayer.current_animation != "kill":
 				$AnimationPlayer.play("kill")
+				$stepsAudioStreamPlayer2D.stop()
 #				move_and_slide(move * 100)
 		STATE_STABING:
 #			get_node("stab"+str(randi()%4+1)).play()
+			$stepsAudioStreamPlayer2D.stop()
 			stab_timer -= delta
 			if stab_timer <= 0:
 				stab_timer = 1
