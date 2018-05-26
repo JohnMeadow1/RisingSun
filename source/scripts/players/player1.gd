@@ -76,6 +76,7 @@ func _process(delta):
 					item.rotation = PI/2;
 					
 					self.drag_item = item
+					get_node("pickupAudioStreamPlayer2D").play()
 					break
 		else:
 			# Hands occupied - left item
@@ -83,6 +84,7 @@ func _process(delta):
 			self.drag_item.rotation = 0
 			
 			self.drag_item = null
+			get_node("dropAudioStreamPlayer2D").play()
 				
 	# Update position of picked item
 	if self.drag_item != null:
