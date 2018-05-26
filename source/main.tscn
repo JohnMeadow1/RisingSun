@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/sky.tscn" type="PackedScene" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://scenes/no_player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/fire_anim.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sounds/bg-music-383063__reasanka__ukulele-loop-with-vocals-by-rea.wav" type="AudioStream" id=11]
+[ext_resource path="res://fonts/Fairfax.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://Label.gd" type="Script" id=13]
 
 [sub_resource type="ParticlesMaterial" id=1]
 
@@ -52,7 +54,15 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Angle", "Angular Velocity", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Scale", "Spread", "Trail" ]
 
-[node name="main" type="Node2D"]
+[sub_resource type="DynamicFont" id=2]
+
+size = 20
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 12 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="main" type="Node2D" index="0"]
 
 scale = Vector2( 3, 3 )
 script = ExtResource( 1 )
@@ -323,5 +333,46 @@ max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
+
+[node name="GridContainer" type="GridContainer" parent="." index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 10.0
+margin_bottom = 10.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+columns = 2
+_sections_unfolded = [ "Margin" ]
+
+[node name="Label" type="Label" parent="GridContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+text = "Day "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script = ExtResource( 13 )
+_sections_unfolded = [ "custom_fonts" ]
 
 
