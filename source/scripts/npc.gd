@@ -3,12 +3,15 @@ extends KinematicBody2D
 var walk_timer = null
 var idle_timer = null
 
-enum {STATE_IDLE, STATE_WALKING}
+enum {STATE_IDLE, STATE_WALKING, STATE_DYING, STATE_DEAD }
 
 var speed = 0
 var dir = Vector2()
 var dragged = false
 var state = STATE_IDLE
+var dying_timer = 1
+
+var blood_object = load("res://scenes/blood.tscn")
 
 func _ready():
 	randomize()
@@ -62,7 +65,10 @@ func drag(flag):
 	if flag:
 		$Sprite/AnimationPlayer.play("panic")
 	else:
-		randomize_move()
+		if position.x < $"../../killzone".position.x +30 and position.x > $"../../killzone".position.x -30 and position.y < $"../../killzone".position.y +30 and position.y > $"../../killzone".position.y -30:
+			self.state = STATE_DYING
+		else:
+			randomize_move()
 
 func _physics_process(delta):
 	if self.dragged:
@@ -93,3 +99,22 @@ func _physics_process(delta):
 					$Sprite.flip_h = false 
 				else:
 					$Sprite.flip_h = true
+		STATE_DYING:
+			dying_timer -= delta
+			if dying_timer <=0:
+				self.state = STATE_DEAD
+			if randi() %10:
+				
+				var new_blood = blood_object.instance()
+				new_blood.rotation = rand_range(0,2*PI)
+				new_blood.position = position
+				new_blood.get_node("Sprite").frame = randi()%8
+				new_blood.linear_velocity = Vector2(rand_range(-50,50),rand_range(-10,50))
+				
+				$"../../../background/blood_pool".add_child(new_blood)
+		STATE_DEAD:
+			$CollisionShape2D.disabled = true
+			set_process(false)
+			$Sprite/AnimationPlayer.play("idle")
+			rotation = PI/2
+			
