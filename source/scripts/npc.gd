@@ -33,7 +33,7 @@ func _ready():
 func initialize_random_position():
 	var point = $"../../spawn_points".get_child(randi()%$"../../spawn_points".get_children().size()).position
 	
-	position = point + Vector2(rand_range(-50,50),rand_range(-50,50))
+	position = point + Vector2(rand_range(-30,30),rand_range(-30,30))
 #	print(point)
 	
 func randomize_move():

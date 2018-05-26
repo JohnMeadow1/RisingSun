@@ -7,10 +7,10 @@ path="res://.import/npc.png-aced6a531ae12dd1af29c94d7539d100.stex"
 [deps]
 
 source_file="res://images/npc.png"
-source_md5="94a515cb74c3eb544097aa107212c2b0"
+source_md5="0eb6df42e102e93b91727f097213817c"
 
 dest_files=[ "res://.import/npc.png-aced6a531ae12dd1af29c94d7539d100.stex" ]
-dest_md5="070ca15959c882018dc58d43977466c3"
+dest_md5="f0c054437b34e13f99ce53bca8371827"
 
 [params]
 

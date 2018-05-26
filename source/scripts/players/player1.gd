@@ -78,7 +78,7 @@ func _process(delta):
 					self.drag_item = item
 					break
 		else:
-			# Hands occupied - left item			
+			# Hands occupied - left item
 			self.drag_item.drag(false)
 			self.drag_item.rotation = 0
 			
