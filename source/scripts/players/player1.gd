@@ -96,6 +96,7 @@ func _physics_process(delta):
 					self.state = STATE_STABING
 					item.state = item.STATE_DYING
 					item.get_node("sacrificeAudioStreamPlayer2D").play()
+					item.get_node("Sprite/AnimationPlayer").play("panic")
 					self.kill_count += 1
 					
 					break
