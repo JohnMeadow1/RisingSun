@@ -42,10 +42,12 @@ func _process(delta):
 	if Input.is_action_pressed("move_left_p" + str(PLAYER_NUM)) and position.x > 0:
 		move.x  -= offset;
 		is_moving = true
+		$Sprite.flip_h = true
 
 	if Input.is_action_pressed("move_right_p" + str(PLAYER_NUM)) and position.x < get_viewport_rect().size.x:
 		move.x  += offset;
 		is_moving = true
+		$Sprite.flip_h = false 
 	
 	move_and_slide(move * 100)
 
