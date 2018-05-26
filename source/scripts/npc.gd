@@ -52,7 +52,7 @@ func randomize_move():
 	dir = Vector2(sin(orient), cos(orient))
 
 func randomize_idle():
-	$Sprite/AnimationPlayer.play("idle")
+	$Sprite/AnimationPlayer.play("prey")
 	self.state = STATE_IDLE
 	
 	# Timer	
@@ -103,6 +103,15 @@ func _physics_process(delta):
 			dying_timer -= delta
 			if dying_timer <=0:
 				self.state = STATE_DEAD
+				$CollisionShape2D.disabled = true
+			
+				if randi()%2:
+					$Sprite.flip_v = true
+				else:
+					$Sprite.flip_v = false
+				$Sprite/AnimationPlayer.play("dead")
+				rotation = PI/2
+				
 			if randi() %10:
 				
 				var new_blood = blood_object.instance()
@@ -113,8 +122,4 @@ func _physics_process(delta):
 				
 				$"../../../background/blood_pool".add_child(new_blood)
 		STATE_DEAD:
-			$CollisionShape2D.disabled = true
-			set_process(false)
-			$Sprite/AnimationPlayer.play("idle")
-			rotation = PI/2
-			
+			pass
