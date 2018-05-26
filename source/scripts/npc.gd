@@ -1,4 +1,4 @@
-extends Node2D
+extends KinematicBody2D
 
 var walk_timer = null
 var idle_timer = null
@@ -22,14 +22,19 @@ func _ready():
 	self.idle_timer.set_one_shot(true)
 	self.add_child(self.idle_timer)
 	
-	position.x = rand_range(50,500)
-	position.y = rand_range(50,500)
+	initialize_random_position()
+
 	
 	# Init behavior
 	if randi() % 2:
 		self.randomize_move()
 	else:
 		self.randomize_idle()
+func initialize_random_position():
+	var point = $"../../spawn_points".get_child(randi()%$"../../spawn_points".get_children().size()).position
+	
+	position = point + Vector2(rand_range(-50,50),rand_range(-50,50))
+#	print(point)
 	
 func randomize_move():
 	$Sprite/AnimationPlayer.play("walk")
@@ -39,7 +44,7 @@ func randomize_move():
 	self.walk_timer.wait_time = rand_range(3.0, 5.0)
 	self.walk_timer.start()
 	
-	speed = rand_range(0.3, 1.0)
+	speed = rand_range(0.3, 0.6)
 	var orient = rand_range(0, 2 * PI)
 	dir = Vector2(sin(orient), cos(orient))
 
@@ -80,7 +85,10 @@ func _physics_process(delta):
 					dir = -dir
 				
 				position += dir * speed
-				
+				var collisions = move_and_collide(dir *speed )
+				if collisions:
+					var orient = rand_range(0, 2 * PI)
+					dir = Vector2(sin(orient), cos(orient))
 				if(dir.x > 0):
 					$Sprite.flip_h = false 
 				else:

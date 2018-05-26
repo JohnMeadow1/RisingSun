@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/sky.tscn" type="PackedScene" id=2]
 [ext_resource path="res://images/background0.png" type="Texture" id=3]
 [ext_resource path="res://images/temple0.png" type="Texture" id=4]
 [ext_resource path="res://scenes/players/player1.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/no_player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/fire_anim.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scripts/spawner.gd" type="Script" id=6]
+[ext_resource path="res://scenes/no_player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/fire_anim.tscn" type="PackedScene" id=8]
 
 [node name="main" type="Node2D" index="0"]
 
@@ -26,7 +27,7 @@ __meta__ = {
 
 [node name="Sun" parent="background" index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 200.979, 138.667 )
+position = Vector2( 200.979, 139.351 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="background" type="Sprite" parent="background" index="1"]
@@ -43,48 +44,155 @@ __meta__ = {
 
 position = Vector2( 200.122, 173.804 )
 texture = ExtResource( 4 )
-
-[node name="foreground" type="Node2D" parent="." index="1"]
-
-_sections_unfolded = [ "Visibility" ]
-
-[node name="player1" parent="foreground" index="0" instance=ExtResource( 5 )]
-
-position = Vector2( 116.207, 249.098 )
-_sections_unfolded = [ "Material", "Transform", "Visibility" ]
-PLAYER_NUM = 1
-
-[node name="player2" parent="foreground" index="1" instance=ExtResource( 5 )]
-
-position = Vector2( 294.229, 246.643 )
-_sections_unfolded = [ "Material", "Transform", "Visibility" ]
-PLAYER_NUM = 2
-
-[node name="player3" parent="foreground" index="2" instance=ExtResource( 5 )]
-
-position = Vector2( 205.832, 249.098 )
-_sections_unfolded = [ "Material", "Transform", "Visibility" ]
-PLAYER_NUM = 3
-
-[node name="items" type="Node2D" parent="foreground" index="3"]
-
-editor/display_folded = true
-_sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="npc" parent="foreground/items" index="0" instance=ExtResource( 6 )]
+[node name="StaticBody2D" type="StaticBody2D" parent="background" index="3"]
 
-[node name="npc2" parent="foreground/items" index="1" instance=ExtResource( 6 )]
+input_pickable = false
+collision_layer = 3
+collision_mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="npc3" parent="foreground/items" index="2" instance=ExtResource( 6 )]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="background/StaticBody2D" index="0"]
 
-[node name="npc4" parent="foreground/items" index="3" instance=ExtResource( 6 )]
+build_mode = 1
+polygon = PoolVector2Array( 163.568, 104.158, 165.381, 115.948, 184.427, 117.761, 185.333, 247.45, 72.8758, 248.357, 73.7827, 187.594 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="fire_anim" parent="." index="2" instance=ExtResource( 7 )]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="background/StaticBody2D" index="1"]
+
+build_mode = 1
+polygon = PoolVector2Array( 218.889, 118.215, 233.854, 115.948, 235.667, 96.9023, 330.44, 188.047, 330.44, 250.171, 222.064, 247.45 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="background/StaticBody2D" index="2"]
+
+build_mode = 1
+polygon = PoolVector2Array( 2.58976, 187.141, 44.7614, 149.503, 74.6897, 148.597, 164.021, 72.869, 238.842, 71.9621, 326.813, 149.05, 329.987, 126.831, 362.636, 150.41, 399.819, 160.386, 427.934, 3.03642, -35.5007, 8.47792 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="background/StaticBody2D" index="3"]
+
+build_mode = 0
+polygon = PoolVector2Array( 2.37819, 157.055, -61.106, 154.788, -59.9875, 344.491, -0.584442, 416.59, 410.249, 424.299, 503.661, 359.455, 491.418, 148.143, 400.273, 147.236, 398.459, 334.514, -0.584452, 332.247 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="foreground" type="Node2D" parent="." index="1"]
+
+_sections_unfolded = [ "Visibility" ]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="player1" parent="foreground" index="0" instance=ExtResource( 5 )]
+
+position = Vector2( 116.207, 265.765 )
+_sections_unfolded = [ "Collision", "Material", "Transform", "Visibility" ]
+PLAYER_NUM = 1
+
+[node name="player2" parent="foreground" index="1" instance=ExtResource( 5 )]
+
+position = Vector2( 294.229, 263.31 )
+_sections_unfolded = [ "Collision", "Material", "Transform", "Visibility" ]
+PLAYER_NUM = 2
+
+[node name="player3" parent="foreground" index="2" instance=ExtResource( 5 )]
+
+position = Vector2( 205.832, 265.765 )
+_sections_unfolded = [ "Collision", "Material", "Transform", "Visibility" ]
+PLAYER_NUM = 3
+
+[node name="items" type="Node2D" parent="foreground" index="3"]
+
+script = ExtResource( 6 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="npc" parent="foreground/items" index="0" instance=ExtResource( 7 )]
+
+[node name="npc2" parent="foreground/items" index="1" instance=ExtResource( 7 )]
+
+[node name="npc3" parent="foreground/items" index="2" instance=ExtResource( 7 )]
+
+[node name="npc4" parent="foreground/items" index="3" instance=ExtResource( 7 )]
+
+[node name="npc5" parent="foreground/items" index="4" instance=ExtResource( 7 )]
+
+[node name="npc6" parent="foreground/items" index="5" instance=ExtResource( 7 )]
+
+[node name="npc7" parent="foreground/items" index="6" instance=ExtResource( 7 )]
+
+[node name="npc8" parent="foreground/items" index="7" instance=ExtResource( 7 )]
+
+[node name="npc9" parent="foreground/items" index="8" instance=ExtResource( 7 )]
+
+[node name="npc10" parent="foreground/items" index="9" instance=ExtResource( 7 )]
+
+[node name="npc11" parent="foreground/items" index="10" instance=ExtResource( 7 )]
+
+[node name="npc12" parent="foreground/items" index="11" instance=ExtResource( 7 )]
+
+[node name="npc13" parent="foreground/items" index="12" instance=ExtResource( 7 )]
+
+[node name="npc14" parent="foreground/items" index="13" instance=ExtResource( 7 )]
+
+[node name="npc15" parent="foreground/items" index="14" instance=ExtResource( 7 )]
+
+[node name="npc16" parent="foreground/items" index="15" instance=ExtResource( 7 )]
+
+[node name="npc17" parent="foreground/items" index="16" instance=ExtResource( 7 )]
+
+[node name="npc18" parent="foreground/items" index="17" instance=ExtResource( 7 )]
+
+[node name="npc19" parent="foreground/items" index="18" instance=ExtResource( 7 )]
+
+[node name="npc20" parent="foreground/items" index="19" instance=ExtResource( 7 )]
+
+[node name="spawn_points" type="Node2D" parent="foreground" index="4"]
+
+[node name="Node2D" type="Node2D" parent="foreground/spawn_points" index="0"]
+
+position = Vector2( 37.3376, 204.4 )
+scale = Vector2( 3, 3 )
+
+[node name="Node2D2" type="Node2D" parent="foreground/spawn_points" index="1"]
+
+position = Vector2( 116.178, 291.999 )
+scale = Vector2( 3, 3 )
+
+[node name="Node2D3" type="Node2D" parent="foreground/spawn_points" index="2"]
+
+position = Vector2( 281.597, 287.352 )
+scale = Vector2( 3, 3 )
+
+[node name="Node2D4" type="Node2D" parent="foreground/spawn_points" index="3"]
+
+position = Vector2( 359.406, 213.056 )
+scale = Vector2( 3, 3 )
+
+[node name="fire_anim" parent="." index="2" instance=ExtResource( 8 )]
 
 position = Vector2( 199.911, 171.072 )
-scale = Vector2( 1.03852, 0.952977 )
 
 

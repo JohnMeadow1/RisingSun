@@ -1,4 +1,4 @@
-extends Node2D
+extends KinematicBody2D
 
 # class member variables go here, for example:
 # var a = 2
@@ -36,24 +36,32 @@ func _process(delta):
 	#
 	# Move inputs
 	#
-	var offset = (MOVE_SPEED + (self.boost_timer.time_left / self.boost_timer.wait_time) * BOOST_SPEED) * delta
+	var move = Vector2()
+#	var offset = (MOVE_SPEED + (self.boost_timer.time_left / self.boost_timer.wait_time) * BOOST_SPEED) * delta
+	var offset = MOVE_SPEED *delta
 	
 	if Input.is_action_pressed("move_up_p" + str(PLAYER_NUM)) and position.y > 0:
-		position.y -= offset;
+#		position.y -= offset;
+		move.y  -= offset;
 
 	if Input.is_action_pressed("move_down_p" + str(PLAYER_NUM)) and position.y < get_viewport_rect().size.y:
-		position.y += offset;
+#		position.y += offset;
+		move.y  += offset;
 
 	if Input.is_action_pressed("move_left_p" + str(PLAYER_NUM)) and position.x > 0:
-		position.x -= offset;
+#		position.x -= offset;
+		move.x  -= offset;
 
 	if Input.is_action_pressed("move_right_p" + str(PLAYER_NUM)) and position.x < get_viewport_rect().size.x:
-		position.x += offset;
+#		position.x += offset;
+		move.x  += offset;
 
 	# Boost
 	if Input.is_action_pressed("alt_p" + str(PLAYER_NUM)) and position.x < get_viewport_rect().size.x:
 		self.boost_timer.start()
-
+		
+	
+	move_and_slide(move *100)
 	#
 	# Others
 	#
