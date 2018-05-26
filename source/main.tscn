@@ -25,7 +25,7 @@ spread = 0.0
 flatness = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 20.0
-initial_velocity_random = 0.8
+initial_velocity_random = 0.2
 angular_velocity = -7.47032e-42
 angular_velocity_random = 0.0
 orbit_velocity = 0.0
@@ -74,8 +74,6 @@ position = Vector2( 201.596, 139.968 )
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
 
 [node name="Node2D" type="Node2D" parent="background" index="1"]
-
-editor/display_folded = true
 
 [node name="clouds" type="Particles2D" parent="background/Node2D" index="0"]
 
