@@ -114,7 +114,7 @@ radius = 3.0
 audio_stream = ExtResource( 6 )
 random_pitch = 1.4
 
-[node name="player" type="KinematicBody2D"]
+[node name="player" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 2
@@ -224,7 +224,7 @@ area_mask = 1
 
 stream = ExtResource( 10 )
 volume_db = 0.0
-autoplay = true
+autoplay = false
 max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"

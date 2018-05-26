@@ -10,10 +10,13 @@ const MOVE_SPEED  = 200
 export(int) var PLAYER_NUM
 
 enum {STATE_WALK, STATE_IDLE, STATE_FIGHT, STATE_STABING}
+
 var drag_item = null
 var state = null
 var stab_timer = 1
 var samples_played = 0
+
+var kill_count = 0
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -93,7 +96,8 @@ func _physics_process(delta):
 					self.state = STATE_STABING
 					item.state = item.STATE_DYING
 					item.get_node("sacrificeAudioStreamPlayer2D").play()
-					item.get_node("Sprite/AnimationPlayer").play("panic")
+					self.kill_count += 1
+					
 					break
 			
 			if $AnimationPlayer.current_animation != "kill":
@@ -149,6 +153,7 @@ func _physics_process(delta):
 				$draw.play()
 				$AnimationPlayer.play("kill")
 				samples_played = 0
+				self.kill_count += 3
 				
 	# Update position of picked item
 	if self.drag_item != null:
