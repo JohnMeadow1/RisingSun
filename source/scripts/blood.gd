@@ -2,10 +2,12 @@ extends RigidBody2D
 
 var timer = 1
 var is_processing = true
+var cleanup_time = 0
 
 func _ready():
 	randomize()
-	timer = rand_range(0.2,2)
+	timer = rand_range(0.2,0.5)
+	cleanup_time = rand_range(10,15)
 
 func _physics_process(delta):
 	if is_processing:
@@ -16,5 +18,9 @@ func _physics_process(delta):
 			$CollisionShape2D.disabled = true
 			sleeping                   = true
 			is_processing              = false
-#		print ("ok")
+	else:
+		timer+=delta
+		modulate = Color(1,1,1,1-(timer/cleanup_time))
+		if timer>cleanup_time:
+			queue_free()
 

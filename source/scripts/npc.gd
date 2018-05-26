@@ -14,9 +14,11 @@ var dying_timer = 1
 var blood_object = preload("res://scenes/blood.tscn")
 var texture1 = preload("res://images/npc.png")
 var texture2 = preload("res://images/npc2.png")
+var cleanup_time = 0
 
 func _ready():
 	randomize()
+	cleanup_time = rand_range(10,15)
 	if randi()%2:
 		$Sprite.set_texture(texture1)
 	else:
@@ -123,16 +125,21 @@ func _physics_process(delta):
 				
 				game.add_points(1)
 				
-			if randi() %10:
+			if randi() %15:
 				var new_blood = blood_object.instance()
 				new_blood.rotation = rand_range(0,2*PI)
 				new_blood.position = position
 				new_blood.get_node("Sprite").frame = randi()%8
-				new_blood.linear_velocity = Vector2(rand_range(-50,50),rand_range(-10,50))
+				new_blood.linear_velocity = Vector2(rand_range(-600,600),rand_range(-50,600))
 				
 				$"../../../background/blood_pool".add_child(new_blood)
 		#######################################################
 		STATE_DEAD:
+			dying_timer+=delta
+			$Sprite.modulate = Color(1,1,1,1-((dying_timer*5)/cleanup_time-4))
+			if dying_timer>cleanup_time:
+				queue_free()
+
 			pass
 			
 			

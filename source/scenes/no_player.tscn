@@ -129,7 +129,7 @@ radius = 2.0
 audio_stream = ExtResource( 3 )
 random_pitch = 1.3
 
-[node name="npc" type="KinematicBody2D" index="0"]
+[node name="npc" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -173,7 +173,7 @@ volume_db = 0.0
 autoplay = false
 max_distance = 2000.0
 attenuation = 1.0
-bus = "Woman"
+bus = "Master"
 area_mask = 1
 
 
