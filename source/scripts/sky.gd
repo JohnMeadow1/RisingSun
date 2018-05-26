@@ -16,7 +16,11 @@ func _process(delta):
 	
 	if rotation < game.get_sun_pos() * (PI/2):
 		rotation += delta * SUN_SPEED;
-		$sun.rotation -= delta * SUN_SPEED;
+		rotation = min(rotation, game.get_sun_pos() * (PI/2))
+	elif rotation >= game.get_sun_pos() * (PI/2):
+		rotation -= delta * SUN_SPEED;
+		rotation = max(rotation, game.get_sun_pos() * (PI/2))
+	$sun.rotation = -rotation
 	
 	# Modify sun trajectory
 	var sun_mod = -clamp(cos(rotation + (PI/2)), -1, 0)
