@@ -67,7 +67,7 @@ func drag(flag):
 	else:
 		if position.x < $"../../killzone".position.x +30 and position.x > $"../../killzone".position.x -30 and position.y < $"../../killzone".position.y +30 and position.y > $"../../killzone".position.y -30:
 			self.state = STATE_DYING
-			get_node("sacrificeAudioStreamPlayer").play()
+			$sacrificeAudioStreamPlayer2D.play()
 		else:
 			randomize_move()
 
@@ -104,6 +104,14 @@ func _physics_process(delta):
 			dying_timer -= delta
 			if dying_timer <=0:
 				self.state = STATE_DEAD
+				$CollisionShape2D.disabled = true
+				$Sprite/AnimationPlayer.play("dead")
+				if randi()%2:
+					$Sprite.flip_v = true
+				else:
+					$Sprite.flip_v = false
+					
+				rotation = PI/2
 			if randi() %10:
 				
 				var new_blood = blood_object.instance()
@@ -114,9 +122,6 @@ func _physics_process(delta):
 				
 				$"../../../background/blood_pool".add_child(new_blood)
 		STATE_DEAD:
-			$CollisionShape2D.disabled = true
-			set_process(false)
-			$Sprite/AnimationPlayer.play("idle")
-			rotation = PI/2
+			pass
 			
 			

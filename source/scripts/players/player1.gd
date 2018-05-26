@@ -72,7 +72,7 @@ func _process(delta):
 					item.rotation = PI/2;
 					
 					self.drag_item = item
-					get_node("pickupAudioStreamPlayer2D").play()
+					$pickupAudioStreamPlayer2D.play()
 					break
 		else:
 			# Hands occupied - left item
