@@ -21,7 +21,7 @@ tracks/0/keys = {
 "values": [ 0, 2, 1 ]
 }
 
-[node name="fire_anim" type="Sprite" index="0"]
+[node name="fire_anim" type="Sprite"]
 
 position = Vector2( 204.506, 170.169 )
 scale = Vector2( 1.03852, 0.952977 )

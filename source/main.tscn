@@ -1,18 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/sky.tscn" type="PackedScene" id=2]
 [ext_resource path="res://images/background0.png" type="Texture" id=3]
-[ext_resource path="res://images/temple.png" type="Texture" id=4]
+[ext_resource path="res://images/temple0.png" type="Texture" id=4]
 [ext_resource path="res://scenes/players/player1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/no_player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://images/night.png" type="Texture" id=7]
-
-[sub_resource type="CanvasItemMaterial" id=1]
-
-render_priority = 0
-blend_mode = 0
-light_mode = 0
+[ext_resource path="res://scenes/fire_anim.tscn" type="PackedScene" id=7]
 
 [node name="main" type="Node2D" index="0"]
 
@@ -23,18 +17,19 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Node" type="Node2D" parent="." index="0"]
+[node name="background" type="Node2D" parent="." index="0"]
 
+_sections_unfolded = [ "Visibility" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sun" parent="Node" index="0" instance=ExtResource( 2 )]
+[node name="Sun" parent="background" index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 200.979, 102 )
+position = Vector2( 200.979, 138.667 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="background" type="Sprite" parent="Node" index="1"]
+[node name="background" type="Sprite" parent="background" index="1"]
 
 position = Vector2( 0, 33 )
 texture = ExtResource( 3 )
@@ -44,33 +39,34 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="temple" type="Sprite" parent="Node" index="2"]
+[node name="temple" type="Sprite" parent="background" index="2"]
 
 position = Vector2( 200.122, 173.804 )
 texture = ExtResource( 4 )
 
-[node name="player1" parent="." index="1" instance=ExtResource( 5 )]
+[node name="foreground" type="Node2D" parent="." index="1"]
 
-modulate = Color( 0.111328, 0.233093, 0.890625, 1 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="player1" parent="foreground" index="0" instance=ExtResource( 5 )]
+
 position = Vector2( 116.207, 249.098 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 PLAYER_NUM = 1
 
-[node name="player2" parent="." index="2" instance=ExtResource( 5 )]
+[node name="player2" parent="foreground" index="1" instance=ExtResource( 5 )]
 
-modulate = Color( 0.20874, 0.890625, 0.111328, 1 )
 position = Vector2( 294.229, 246.643 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 PLAYER_NUM = 2
 
-[node name="player3" parent="." index="3" instance=ExtResource( 5 )]
+[node name="player3" parent="foreground" index="2" instance=ExtResource( 5 )]
 
-modulate = Color( 0.890625, 0.111328, 0.111328, 1 )
 position = Vector2( 205.832, 249.098 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 PLAYER_NUM = 3
 
-[node name="items" type="Node2D" parent="." index="4"]
+[node name="items" type="Node2D" parent="foreground" index="3"]
 
 editor/display_folded = true
 _sections_unfolded = [ "Transform" ]
@@ -78,20 +74,17 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="npc" parent="items" index="0" instance=ExtResource( 6 )]
+[node name="npc" parent="foreground/items" index="0" instance=ExtResource( 6 )]
 
-[node name="npc2" parent="items" index="1" instance=ExtResource( 6 )]
+[node name="npc2" parent="foreground/items" index="1" instance=ExtResource( 6 )]
 
-[node name="npc3" parent="items" index="2" instance=ExtResource( 6 )]
+[node name="npc3" parent="foreground/items" index="2" instance=ExtResource( 6 )]
 
-[node name="npc4" parent="items" index="3" instance=ExtResource( 6 )]
+[node name="npc4" parent="foreground/items" index="3" instance=ExtResource( 6 )]
 
-[node name="sky" type="Sprite" parent="." index="5"]
+[node name="fire_anim" parent="." index="2" instance=ExtResource( 7 )]
 
-self_modulate = Color( 1, 1, 1, 0.773451 )
-material = SubResource( 1 )
-texture = ExtResource( 7 )
-centered = false
-_sections_unfolded = [ "Material", "Visibility" ]
+position = Vector2( 199.911, 171.072 )
+scale = Vector2( 1.03852, 0.952977 )
 
 

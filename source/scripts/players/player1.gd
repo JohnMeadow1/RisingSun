@@ -5,9 +5,9 @@ extends Node2D
 # var b = "textvar"
 
 # Const
-const MOVE_SPEED = 200 
+const MOVE_SPEED  = 200 
 
-const BOOST_TIME = 0.4
+const BOOST_TIME  = 0.4
 const BOOST_SPEED = 200
 
 export(int) var PLAYER_NUM
@@ -24,6 +24,12 @@ func _ready():
 	self.boost_timer.wait_time = BOOST_TIME
 	self.boost_timer.set_one_shot(true)
 	self.add_child(self.boost_timer)
+	if PLAYER_NUM == 1:
+		$Sprite2.modulate = Color(1,0,0,1)
+	if PLAYER_NUM == 2:
+		$Sprite2.modulate = Color(0,1,0,1)
+	if PLAYER_NUM == 3:
+		$Sprite2.modulate = Color(0,0,1,1)
 	
 func _process(delta):
 		

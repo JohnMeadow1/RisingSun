@@ -1,17 +1,33 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/sky.gd" type="Script" id=1]
-[ext_resource path="res://scenes/icon.png" type="Texture" id=2]
+[ext_resource path="res://images/daysky.png" type="Texture" id=2]
+[ext_resource path="res://images/nightsky2.png" type="Texture" id=3]
+[ext_resource path="res://images/sunhappy.png" type="Texture" id=4]
 
-[node name="Sun" type="Node2D" index="0"]
+[node name="Sun" type="Node2D"]
 
 script = ExtResource( 1 )
 
-[node name="sun" type="Sprite" parent="." index="0"]
+[node name="daysky" type="Sprite" parent="." index="0"]
 
-position = Vector2( 150, 0 )
+rotation = -1.5708
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="nightsky" type="Sprite" parent="." index="1"]
+
+rotation = -1.5708
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="sun" type="Sprite" parent="." index="2"]
+
+position = Vector2( 150, 0 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+hframes = 2
+_sections_unfolded = [ "Animation", "Transform", "Z Index" ]
 __meta__ = {
 "_edit_lock_": true
 }
