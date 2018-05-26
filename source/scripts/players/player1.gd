@@ -35,8 +35,8 @@ func _ready():
 func _physics_process(delta):
 	#
 	# Move inputs
-	#
-	get_node("../../GridContainer/player"+str(PLAYER_NUM)+"Label").text = str(self.kill_count)
+	#CanvasLayer/HSplitContainer/player1Label
+	get_node("../../CanvasLayer/HBoxContainer/player"+str(PLAYER_NUM)+"Label").text = str(self.kill_count)
 	
 	var move = Vector2()
 	if Input.is_action_pressed("ui_cancel"):
