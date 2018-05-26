@@ -16,13 +16,16 @@ func add_points(points):
 	self.points += points
 	if points>0:
 		sun_set_timer = 3
+	if self.points > self.days*40+20:
+		self.points += 20
+		self.days += 1
 	
 # Return value in range (0, 1) depending on current score
 func get_sun_pos():
 	return (self.points / POINTS_TO_HORIZON)
 	
 func get_num_of_days():
-	self.days = self.points / 40
+#	self.days = self.points / 40
 #	print(self.days)
 	return floor(self.days)
 

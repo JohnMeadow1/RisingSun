@@ -15,7 +15,10 @@ func _ready():
 func _process(delta):
 	
 	if rotation < game.get_sun_pos() * (PI/2):
-		rotation += delta * SUN_SPEED;
+		if fmod(rotation,2*PI)/PI>1:
+			rotation += delta * SUN_SPEED*10;
+		else:
+			rotation += delta * SUN_SPEED;
 		rotation = min(rotation, game.get_sun_pos() * (PI/2))
 		$sun.frame=0
 	elif rotation >= game.get_sun_pos() * (PI/2):
