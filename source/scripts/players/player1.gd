@@ -34,6 +34,9 @@ func _physics_process(delta):
 	# Move inputs
 	#
 	var move = Vector2()
+	if Input.is_action_pressed("ui_cancel"):
+		get_tree().change_scene("res://escape_menu.tscn")
+
 	# Fight 
 	if Input.is_action_pressed("alt_p" + str(PLAYER_NUM)):
 		self.state = STATE_FIGHT
@@ -113,7 +116,7 @@ func _physics_process(delta):
 		if self.drag_item == null:
 			# Hands empty - drag item			
 			for item in $"../items".get_children():
-				if ( (item.position - position).length() < 30 ) and ( item.dragged == false):
+				if item.state!=item.STATE_DEAD and ( (item.position - position).length() < 30 ) and ( item.dragged == false):
 					item.drag(true)
 					item.rotation = PI/2;
 					
@@ -124,7 +127,7 @@ func _physics_process(delta):
 			# Hands occupied - left item
 			self.drag_item.drag(false)
 			self.drag_item.rotation = 0
-			
+			self.drag_item.position = self.position 
 			self.drag_item = null
 			get_node("dropAudioStreamPlayer2D").play()
 			if position.x < $"../killzone".position.x +30 and position.x > $"../killzone".position.x -30 and position.y < $"../killzone".position.y +30 and position.y > $"../killzone".position.y -30:
