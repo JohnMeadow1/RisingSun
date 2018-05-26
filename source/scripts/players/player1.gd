@@ -9,11 +9,16 @@ const MOVE_SPEED  = 200
 
 export(int) var PLAYER_NUM
 
+enum {STATE_WALK, STATE_IDLE, STATE_FIGHT}
+
 var drag_item = null
+var state = null
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
+	
+	self.state = STATE_IDLE
 	
 	# Color players
 	if PLAYER_NUM == 1:
@@ -27,40 +32,57 @@ func _process(delta):
 	#
 	# Move inputs
 	#
-	var move = Vector2()
-	var offset = MOVE_SPEED * delta
-	var is_moving = false
 	
-	if Input.is_action_pressed("move_up_p" + str(PLAYER_NUM)) and position.y > 0:
-		move.y  -= offset;
-		is_moving = true
-
-	if Input.is_action_pressed("move_down_p" + str(PLAYER_NUM)) and position.y < get_viewport_rect().size.y:
-		move.y  += offset;
-		is_moving = true
-
-	if Input.is_action_pressed("move_left_p" + str(PLAYER_NUM)) and position.x > 0:
-		move.x  -= offset;
-		is_moving = true
-		$Sprite.flip_h = true
-
-	if Input.is_action_pressed("move_right_p" + str(PLAYER_NUM)) and position.x < get_viewport_rect().size.x:
-		move.x  += offset;
-		is_moving = true
-		$Sprite.flip_h = false 
+	# Fight 
+	if Input.is_action_pressed("alt_p" + str(PLAYER_NUM)):
+		self.state = STATE_FIGHT
+	else:
+		var move = Vector2()
+		var offset = MOVE_SPEED * delta
+		var player_moved = false
+		
+		if Input.is_action_pressed("move_up_p" + str(PLAYER_NUM)) and position.y > 0:
+			move.y  -= offset;
+			player_moved = true
 	
-	move_and_slide(move * 100)
+		if Input.is_action_pressed("move_down_p" + str(PLAYER_NUM)) and position.y < get_viewport_rect().size.y:
+			move.y  += offset;
+			player_moved = true
+		
+		if Input.is_action_pressed("move_left_p" + str(PLAYER_NUM)) and position.x > 0:
+			move.x  -= offset;
+			player_moved = true		
+			$Sprite.flip_h = true
+			$Sprite2.flip_h = true
+	
+		if Input.is_action_pressed("move_right_p" + str(PLAYER_NUM)) and position.x < get_viewport_rect().size.x:
+			move.x  += offset;
+			player_moved = true
+			$Sprite.flip_h = false 
+			$Sprite2.flip_h = false
+	
+		if player_moved:
+			self.state = STATE_WALK
+		else:
+			self.state = STATE_IDLE
 
+		move_and_slide(move * 100)
+	
 	#
 	# Others
 	#
 	
 	# Update animation
-	if is_moving:
-		if $AnimationPlayer.current_animation != "walk":
-			$AnimationPlayer.play("walk")
-	else:
-		$AnimationPlayer.play("idle")
+	match self.state:
+		STATE_WALK:
+			if $AnimationPlayer.current_animation != "walk":
+				$AnimationPlayer.play("walk")
+		STATE_IDLE:
+			if $AnimationPlayer.current_animation != "idle":
+				$AnimationPlayer.play("idle")
+		STATE_FIGHT:
+			if $AnimationPlayer.current_animation != "kill":
+				$AnimationPlayer.play("kill")
 	
 	# Pick item on the floor
 	if Input.is_action_just_pressed("use_p" + str(PLAYER_NUM)):
@@ -84,6 +106,6 @@ func _process(delta):
 				
 	# Update position of picked item
 	if self.drag_item != null:
-		self.drag_item.position = self.position
+		self.drag_item.position = self.position - Vector2(6, 12)
 		
 	

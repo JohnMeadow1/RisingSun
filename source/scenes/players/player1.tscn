@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/players/player1.gd" type="Script" id=1]
-[ext_resource path="res://images/shaman.png" type="Texture" id=2]
-[ext_resource path="res://images/Decorations.png" type="Texture" id=3]
+[ext_resource path="res://images/shaman2.png" type="Texture" id=2]
+[ext_resource path="res://images/decorations2.png" type="Texture" id=3]
 [ext_resource path="res://sounds/pick-up-316423__littlerobotsoundfactory__human-evil-03.wav" type="AudioStream" id=4]
 [ext_resource path="res://sounds/drop-189159__jorickhoofd__first-person-face-punch-1.wav" type="AudioStream" id=5]
 
@@ -10,7 +10,7 @@
 
 resource_name = "idle"
 length = 1.0
-loop = false
+loop = true
 step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -23,6 +23,49 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+
+resource_name = "kill"
+length = 0.4
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 6, 7, 8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 6, 7, 8 ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -60,7 +103,7 @@ tracks/1/keys = {
 custom_solver_bias = 0.0
 radius = 3.0
 
-[node name="player" type="KinematicBody2D"]
+[node name="player" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 2
@@ -72,22 +115,23 @@ PLAYER_NUM = null
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( 0, -13 )
+position = Vector2( 2, -14 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 5
 texture = ExtResource( 2 )
-hframes = 5
-_sections_unfolded = [ "Animation", "Region", "Transform", "Z Index" ]
+hframes = 9
+frame = 6
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Z Index" ]
 
 [node name="Sprite2" type="Sprite" parent="." index="1"]
 
-position = Vector2( 0, -13 )
+position = Vector2( 2, -14 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 6
 texture = ExtResource( 3 )
-hframes = 5
-frame = 1
-_sections_unfolded = [ "Animation", "Z Index" ]
+hframes = 9
+frame = 6
+_sections_unfolded = [ "Animation", "Offset", "Transform", "Z Index" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 
@@ -97,6 +141,7 @@ playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/idle = SubResource( 1 )
+anims/kill = SubResource( 4 )
 anims/walk = SubResource( 2 )
 blend_times = [  ]
 

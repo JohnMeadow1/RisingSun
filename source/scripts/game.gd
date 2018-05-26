@@ -17,7 +17,6 @@ func add_points(points):
 	
 # Return value in range (0, 1) depending on current score
 func get_sun_pos():
-	print(self.points / POINTS_TO_HORIZON)
 	return (self.points / POINTS_TO_HORIZON)
 
 #func _process(delta):
