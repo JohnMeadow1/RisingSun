@@ -36,6 +36,8 @@ func _physics_process(delta):
 	#
 	# Move inputs
 	#
+	get_node("../../GridContainer/player"+str(PLAYER_NUM)+"Label").text = str(self.kill_count)
+	
 	var move = Vector2()
 	if Input.is_action_pressed("ui_cancel"):
 		get_tree().change_scene("res://escape_menu.tscn")
@@ -91,7 +93,7 @@ func _physics_process(delta):
 #				move_and_slide(move * 100)
 		STATE_FIGHT:
 			for item in $"../items".get_children():
-				if item.state!=item.STATE_DEAD and ( (item.position - position).length() < 20 ) and ( item.dragged == false):
+				if item.state!=item.STATE_DEAD and item.state!=item.STATE_DYING and ( (item.position - position).length() < 20 ) and ( item.dragged == false):
 					$draw.play()
 					self.state = STATE_STABING
 					item.state = item.STATE_DYING

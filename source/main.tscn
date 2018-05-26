@@ -242,7 +242,7 @@ polygon = PoolVector2Array( 80.8227, 109.675, -1.91044, 105.243, -5.97322, -21.4
 
 [node name="foreground" type="Node2D" parent="." index="1"]
 
-_sections_unfolded = [ "Pause", "Visibility" ]
+_sections_unfolded = [ "Pause", "Visibility", "Z Index" ]
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -406,10 +406,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 80.0
-margin_top = 2.0
-margin_right = 146.0
-margin_bottom = 18.0
+margin_left = 265.0
+margin_top = 4.0
+margin_right = 272.0
+margin_bottom = 20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -417,11 +417,12 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 3 )
-text = "Player1: "
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "0"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts", "custom_styles" ]
+_sections_unfolded = [ "Material", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
 [node name="player2Label" type="Label" parent="GridContainer" index="2"]
 
@@ -429,10 +430,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 186.0
-margin_top = 2.0
-margin_right = 252.0
-margin_bottom = 18.0
+margin_left = 312.0
+margin_top = 4.0
+margin_right = 319.0
+margin_bottom = 20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -440,11 +441,12 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 4 )
-text = "Player2: "
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+text = "0"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "Material", "custom_colors", "custom_constants", "custom_fonts" ]
 
 [node name="player3Label" type="Label" parent="GridContainer" index="3"]
 
@@ -452,10 +454,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 292.0
-margin_top = 2.0
-margin_right = 358.0
-margin_bottom = 18.0
+margin_left = 359.0
+margin_top = 4.0
+margin_right = 366.0
+margin_bottom = 20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -463,10 +465,11 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 5 )
-text = "Player3: "
+custom_colors/font_color = Color( 0, 0, 1, 1 )
+text = "0"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts" ]
 
 

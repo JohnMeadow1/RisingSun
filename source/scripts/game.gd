@@ -5,6 +5,8 @@ var points = 0
 var days = 0 
 const POINTS_TO_HORIZON = 10.0
 
+
+
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
