@@ -1,13 +1,55 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/sky.tscn" type="PackedScene" id=2]
-[ext_resource path="res://images/background0.png" type="Texture" id=3]
-[ext_resource path="res://images/temple0.png" type="Texture" id=4]
-[ext_resource path="res://scenes/players/player1.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scripts/spawner.gd" type="Script" id=6]
-[ext_resource path="res://scenes/no_player.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/fire_anim.tscn" type="PackedScene" id=8]
+[ext_resource path="res://images/cloud1.png" type="Texture" id=3]
+[ext_resource path="res://images/cloud2.png" type="Texture" id=4]
+[ext_resource path="res://images/background0.png" type="Texture" id=5]
+[ext_resource path="res://images/temple0.png" type="Texture" id=6]
+[ext_resource path="res://scenes/players/player1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scripts/spawner.gd" type="Script" id=8]
+[ext_resource path="res://scenes/no_player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/fire_anim.tscn" type="PackedScene" id=10]
+
+[sub_resource type="ParticlesMaterial" id=1]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 2
+emission_box_extents = Vector3( 1, 50, 1 )
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 0.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 20.0
+initial_velocity_random = 0.8
+angular_velocity = -7.47032e-42
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 180.0
+angle_random = 0.0
+scale = 1.0
+scale_random = 0.5
+color = Color( 1, 1, 1, 1 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Angle", "Angular Velocity", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Scale", "Spread", "Trail" ]
 
 [node name="main" type="Node2D" index="0"]
 
@@ -30,25 +72,73 @@ __meta__ = {
 position = Vector2( 200.979, 139.351 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="background" type="Sprite" parent="background" index="1"]
+[node name="clouds" type="Particles2D" parent="background" index="1"]
+
+position = Vector2( 489.894, 48.8154 )
+rotation = -3.14159
+emitting = true
+amount = 4
+lifetime = 60.0
+one_shot = false
+preprocess = 30.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 1 )
+texture = ExtResource( 3 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Process Material", "Textures", "Time", "Transform", "Visibility" ]
+
+[node name="clouds2" type="Particles2D" parent="background" index="2"]
+
+position = Vector2( 493.16, 51.0875 )
+rotation = -3.14159
+emitting = true
+amount = 4
+lifetime = 60.0
+one_shot = false
+preprocess = 30.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 1 )
+texture = ExtResource( 4 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Process Material", "Textures", "Time", "Transform", "Visibility" ]
+
+[node name="background" type="Sprite" parent="background" index="3"]
 
 position = Vector2( 0, 33 )
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 centered = false
 _sections_unfolded = [ "Offset", "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="temple" type="Sprite" parent="background" index="2"]
+[node name="temple" type="Sprite" parent="background" index="4"]
 
 position = Vector2( 200.122, 173.804 )
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="background" index="3"]
+[node name="StaticBody2D" type="StaticBody2D" parent="background" index="5"]
 
 input_pickable = false
 collision_layer = 3
@@ -102,19 +192,19 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="player1" parent="foreground" index="0" instance=ExtResource( 5 )]
+[node name="player1" parent="foreground" index="0" instance=ExtResource( 7 )]
 
 position = Vector2( 116.207, 265.765 )
 _sections_unfolded = [ "Collision", "Material", "Transform", "Visibility" ]
 PLAYER_NUM = 1
 
-[node name="player2" parent="foreground" index="1" instance=ExtResource( 5 )]
+[node name="player2" parent="foreground" index="1" instance=ExtResource( 7 )]
 
 position = Vector2( 294.229, 263.31 )
 _sections_unfolded = [ "Collision", "Material", "Transform", "Visibility" ]
 PLAYER_NUM = 2
 
-[node name="player3" parent="foreground" index="2" instance=ExtResource( 5 )]
+[node name="player3" parent="foreground" index="2" instance=ExtResource( 7 )]
 
 position = Vector2( 205.832, 265.765 )
 _sections_unfolded = [ "Collision", "Material", "Transform", "Visibility" ]
@@ -122,58 +212,58 @@ PLAYER_NUM = 3
 
 [node name="items" type="Node2D" parent="foreground" index="3"]
 
-script = ExtResource( 6 )
+script = ExtResource( 8 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="npc" parent="foreground/items" index="0" instance=ExtResource( 7 )]
+[node name="npc" parent="foreground/items" index="0" instance=ExtResource( 9 )]
 
-[node name="npc2" parent="foreground/items" index="1" instance=ExtResource( 7 )]
+[node name="npc2" parent="foreground/items" index="1" instance=ExtResource( 9 )]
 
-[node name="npc3" parent="foreground/items" index="2" instance=ExtResource( 7 )]
+[node name="npc3" parent="foreground/items" index="2" instance=ExtResource( 9 )]
 
-[node name="npc4" parent="foreground/items" index="3" instance=ExtResource( 7 )]
+[node name="npc4" parent="foreground/items" index="3" instance=ExtResource( 9 )]
 
-[node name="npc5" parent="foreground/items" index="4" instance=ExtResource( 7 )]
+[node name="npc5" parent="foreground/items" index="4" instance=ExtResource( 9 )]
 
-[node name="npc6" parent="foreground/items" index="5" instance=ExtResource( 7 )]
+[node name="npc6" parent="foreground/items" index="5" instance=ExtResource( 9 )]
 
-[node name="npc7" parent="foreground/items" index="6" instance=ExtResource( 7 )]
+[node name="npc7" parent="foreground/items" index="6" instance=ExtResource( 9 )]
 
-[node name="npc8" parent="foreground/items" index="7" instance=ExtResource( 7 )]
+[node name="npc8" parent="foreground/items" index="7" instance=ExtResource( 9 )]
 
-[node name="npc9" parent="foreground/items" index="8" instance=ExtResource( 7 )]
+[node name="npc9" parent="foreground/items" index="8" instance=ExtResource( 9 )]
 
-[node name="npc10" parent="foreground/items" index="9" instance=ExtResource( 7 )]
+[node name="npc10" parent="foreground/items" index="9" instance=ExtResource( 9 )]
 
-[node name="npc11" parent="foreground/items" index="10" instance=ExtResource( 7 )]
+[node name="npc11" parent="foreground/items" index="10" instance=ExtResource( 9 )]
 
-[node name="npc12" parent="foreground/items" index="11" instance=ExtResource( 7 )]
+[node name="npc12" parent="foreground/items" index="11" instance=ExtResource( 9 )]
 
-[node name="npc13" parent="foreground/items" index="12" instance=ExtResource( 7 )]
+[node name="npc13" parent="foreground/items" index="12" instance=ExtResource( 9 )]
 
-[node name="npc14" parent="foreground/items" index="13" instance=ExtResource( 7 )]
+[node name="npc14" parent="foreground/items" index="13" instance=ExtResource( 9 )]
 
-[node name="npc15" parent="foreground/items" index="14" instance=ExtResource( 7 )]
+[node name="npc15" parent="foreground/items" index="14" instance=ExtResource( 9 )]
 
-[node name="npc16" parent="foreground/items" index="15" instance=ExtResource( 7 )]
+[node name="npc16" parent="foreground/items" index="15" instance=ExtResource( 9 )]
 
-[node name="npc17" parent="foreground/items" index="16" instance=ExtResource( 7 )]
+[node name="npc17" parent="foreground/items" index="16" instance=ExtResource( 9 )]
 
-[node name="npc18" parent="foreground/items" index="17" instance=ExtResource( 7 )]
+[node name="npc18" parent="foreground/items" index="17" instance=ExtResource( 9 )]
 
-[node name="npc19" parent="foreground/items" index="18" instance=ExtResource( 7 )]
+[node name="npc19" parent="foreground/items" index="18" instance=ExtResource( 9 )]
 
-[node name="npc20" parent="foreground/items" index="19" instance=ExtResource( 7 )]
+[node name="npc20" parent="foreground/items" index="19" instance=ExtResource( 9 )]
 
 [node name="spawn_points" type="Node2D" parent="foreground" index="4"]
 
 [node name="Node2D" type="Node2D" parent="foreground/spawn_points" index="0"]
 
-position = Vector2( 37.3376, 204.4 )
+position = Vector2( 37.3376, 234.4 )
 scale = Vector2( 3, 3 )
 
 [node name="Node2D2" type="Node2D" parent="foreground/spawn_points" index="1"]
@@ -188,10 +278,10 @@ scale = Vector2( 3, 3 )
 
 [node name="Node2D4" type="Node2D" parent="foreground/spawn_points" index="3"]
 
-position = Vector2( 359.406, 213.056 )
+position = Vector2( 359.406, 219.723 )
 scale = Vector2( 3, 3 )
 
-[node name="fire_anim" parent="." index="2" instance=ExtResource( 8 )]
+[node name="fire_anim" parent="." index="2" instance=ExtResource( 10 )]
 
 position = Vector2( 199.911, 171.072 )
 

@@ -22,4 +22,6 @@ func _process(delta):
 	$"../../foreground".modulate = local_color
 	$"../background".modulate   = local_color
 	$"../temple".modulate       = local_color
+	$"../clouds".modulate       = local_color
+	$"../clouds2".modulate      = local_color
 	pass
