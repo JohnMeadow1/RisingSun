@@ -67,6 +67,7 @@ func drag(flag):
 	else:
 		if position.x < $"../../killzone".position.x +30 and position.x > $"../../killzone".position.x -30 and position.y < $"../../killzone".position.y +30 and position.y > $"../../killzone".position.y -30:
 			self.state = STATE_DYING
+			get_node("sacrificeAudioStreamPlayer").play()
 		else:
 			randomize_move()
 
@@ -117,4 +118,5 @@ func _physics_process(delta):
 			set_process(false)
 			$Sprite/AnimationPlayer.play("idle")
 			rotation = PI/2
+			
 			
