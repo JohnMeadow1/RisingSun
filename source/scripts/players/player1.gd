@@ -87,6 +87,15 @@ func _physics_process(delta):
 				$stepsAudioStreamPlayer2D.stop()
 #				move_and_slide(move * 100)
 		STATE_FIGHT:
+			for item in $"../items".get_children():
+				if item.state!=item.STATE_DEAD and ( (item.position - position).length() < 20 ) and ( item.dragged == false):
+					$draw.play()
+					self.state = STATE_STABING
+					item.state = item.STATE_DYING
+					item.get_node("sacrificeAudioStreamPlayer2D").play()
+					
+					break
+			
 			if $AnimationPlayer.current_animation != "kill":
 				$AnimationPlayer.play("kill")
 				$stepsAudioStreamPlayer2D.stop()
@@ -133,6 +142,7 @@ func _physics_process(delta):
 			self.drag_item.rotation = 0
 			self.drag_item.position = self.position 
 			self.drag_item = null
+			
 			get_node("dropAudioStreamPlayer2D").play()
 			if position.x < $"../killzone".position.x +30 and position.x > $"../killzone".position.x -30 and position.y < $"../killzone".position.y +30 and position.y > $"../killzone".position.y -30:
 				self.state = STATE_STABING
