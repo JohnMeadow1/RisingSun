@@ -44,7 +44,8 @@ func _physics_process(delta):
 
 	# Fight 
 	if Input.is_action_pressed("alt_p" + str(PLAYER_NUM)):
-		self.state = STATE_FIGHT
+		if self.drag_item == null:
+			self.state = STATE_FIGHT
 	else:
 
 		var offset = MOVE_SPEED * delta
@@ -93,7 +94,12 @@ func _physics_process(delta):
 #				move_and_slide(move * 100)
 		STATE_FIGHT:
 			for item in $"../items".get_children():
-				if item.state!=item.STATE_DEAD and item.state!=item.STATE_DYING and ( (item.position - position).length() < 20 ) and ( item.dragged == false):
+				if (
+					item.state != item.STATE_DEAD 
+					and item.state != item.STATE_DYING 
+					and ( (item.position - position).length() < 20 ) 
+					and ( item.dragged == false)
+				):
 					$draw.play()
 					self.state = STATE_STABING
 					item.state = item.STATE_DYING
@@ -131,10 +137,10 @@ func _physics_process(delta):
 #			if $AnimationPlayer.current_animation != "kill":
 #				$AnimationPlayer.play("kill")
 	
-	# Pick item on the floor
+	# Pick NPC
 	if Input.is_action_just_pressed("use_p" + str(PLAYER_NUM)):
 		if self.drag_item == null:
-			# Hands empty - drag item			
+			# Hands empty - drag NPC			
 			for item in $"../items".get_children():
 				if item.state!=item.STATE_DEAD and ( (item.position - position).length() < 30 ) and ( item.dragged == false):
 					item.drag(true)
@@ -144,7 +150,7 @@ func _physics_process(delta):
 					$pickupAudioStreamPlayer2D.play()
 					break
 		else:
-			# Hands occupied - left item
+			# Hands occupied - left NPC
 			self.drag_item.drag(false)
 			self.drag_item.rotation = 0
 			self.drag_item.position = self.position 
@@ -158,7 +164,7 @@ func _physics_process(delta):
 				samples_played = 0
 				self.kill_count += 3
 				
-	# Update position of picked item
+	# Update position of picked NPC
 	if self.drag_item != null:
 		self.drag_item.position = self.position - Vector2(6, 12)
 		
