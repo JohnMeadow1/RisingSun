@@ -13,16 +13,24 @@ enum {STATE_WALK, STATE_IDLE, STATE_FIGHT, STATE_STABING}
 
 var drag_item = null
 var state = null
-var stab_timer = 1
 var samples_played = 0
 
 var kill_count = 0
+
+var stab_timer = 1
+var fight_timer = null # Prevent killing many NPCs at once
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	
 	self.state = STATE_IDLE
+	
+	# Time to kill next NPC
+	self.fight_timer = Timer.new()
+	self.fight_timer.set_one_shot(true)
+	self.fight_timer.wait_time = 0.5
+	self.add_child(self.fight_timer)
 	
 	# Color players
 	if PLAYER_NUM == 1:
@@ -46,6 +54,8 @@ func _physics_process(delta):
 	if Input.is_action_pressed("alt_p" + str(PLAYER_NUM)):
 		if self.drag_item == null:
 			self.state = STATE_FIGHT
+			
+	# Move
 	else:
 
 		var offset = MOVE_SPEED * delta
@@ -93,21 +103,24 @@ func _physics_process(delta):
 				$stepsAudioStreamPlayer2D.stop()
 #				move_and_slide(move * 100)
 		STATE_FIGHT:
-			for item in $"../items".get_children():
-				if (
-					item.state != item.STATE_DEAD 
-					and item.state != item.STATE_DYING 
-					and ( (item.position - position).length() < 20 ) 
-					and ( item.dragged == false)
-				):
-					$draw.play()
-					self.state = STATE_STABING
-					item.state = item.STATE_DYING
-					item.get_node("sacrificeAudioStreamPlayer2D").play()
-					item.get_node("Sprite/AnimationPlayer").play("panic")
-					self.kill_count += 1
-					
-					break
+			# Kill walking NPC
+			if self.fight_timer.is_stopped():
+				for item in $"../items".get_children():
+					if (
+						item.state != item.STATE_DEAD 
+						and item.state != item.STATE_DYING 
+						and ( (item.position - position).length() < 20 ) 
+						and ( item.dragged == false)
+					):
+						$draw.play()
+						self.fight_timer.start()
+						self.state = STATE_STABING
+						item.state = item.STATE_DYING
+						item.get_node("sacrificeAudioStreamPlayer2D").play()
+						item.get_node("Sprite/AnimationPlayer").play("panic")
+						self.kill_count += 1
+						
+						break
 			
 			if $AnimationPlayer.current_animation != "kill":
 				$AnimationPlayer.play("kill")
