@@ -3,7 +3,7 @@ extends KinematicBody2D
 var walk_timer = null
 var idle_timer = null
 
-enum {STATE_IDLE, STATE_WALKING, STATE_DYING, STATE_DEAD }
+enum {STATE_IDLE, STATE_PRAY, STATE_WALKING, STATE_DYING, STATE_DEAD }
 
 var speed = 0
 var dir = Vector2()
@@ -62,9 +62,12 @@ func randomize_move():
 	dir = Vector2(sin(orient), cos(orient))
 
 func randomize_idle():
-	$Sprite/AnimationPlayer.play("idle")
-	self.state = STATE_IDLE
-	
+	if randi()%2:
+		$Sprite/AnimationPlayer.play("idle")
+		self.state = STATE_IDLE
+	else:
+		$Sprite/AnimationPlayer.play("pray")
+		self.state = STATE_PRAY
 	# Timer	
 	self.idle_timer.wait_time = rand_range(1.0, 3.0)
 	self.idle_timer.start()
@@ -91,7 +94,11 @@ func _physics_process(delta):
 			# Stopped
 			if self.idle_timer.is_stopped():
 				self.randomize_move()
-			
+		#######################################################
+		STATE_PRAY:
+			# Stopped
+			if self.idle_timer.is_stopped():
+				self.randomize_move()
 		#######################################################
 		STATE_WALKING:
 			# Walking

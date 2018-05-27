@@ -1,6 +1,6 @@
 extends Node2D
 
-var npc_object = load("res://scenes/no_player.tscn")
+var npc_object = load("res://scenes/npc.tscn")
 var timer = 0.0
 
 func _ready():
