@@ -3,7 +3,7 @@ extends KinematicBody2D
 var walk_timer = null
 var idle_timer = null
 
-enum {STATE_IDLE, STATE_PRAY, STATE_WALKING, STATE_DYING, STATE_DEAD }
+enum {STATE_IDLE,  STATE_WALKING, STATE_PRAY, STATE_DYING, STATE_DEAD }
 
 var speed = 0
 var dir = Vector2()
@@ -62,12 +62,12 @@ func randomize_move():
 	dir = Vector2(sin(orient), cos(orient))
 
 func randomize_idle():
-	if randi()%2:
-		$Sprite/AnimationPlayer.play("idle")
-		self.state = STATE_IDLE
-	else:
-		$Sprite/AnimationPlayer.play("pray")
-		self.state = STATE_PRAY
+#	if randi()%2:
+	$Sprite/AnimationPlayer.play("idle")
+	self.state = STATE_IDLE
+#	else:
+#		$Sprite/AnimationPlayer.play("pray")
+#		self.state = STATE_PRAY
 	# Timer	
 	self.idle_timer.wait_time = rand_range(1.0, 3.0)
 	self.idle_timer.start()
@@ -81,9 +81,24 @@ func drag(flag):
 		if position.x < $"../../killzone".position.x +30 and position.x > $"../../killzone".position.x -30 and position.y < $"../../killzone".position.y +30 and position.y > $"../../killzone".position.y -30:
 			self.state = STATE_DYING
 			$sacrificeAudioStreamPlayer2D.play()
+			get_parent().is_propagating = true
 		else:
 			randomize_move()
+			
+func pray(propagation_value):
+	if position.x<=200:
+		$Sprite.flip_h = false
+	else:
+		$Sprite.flip_h = true
 
+	self.walk_timer.stop()
+	self.idle_timer.stop()
+	self.state = STATE_PRAY
+
+	self.idle_timer.wait_time = rand_range(2.0, 4.0 - propagation_value)
+	self.idle_timer.start()
+	$Sprite/AnimationPlayer.play("pray")
+	
 func _physics_process(delta):
 	if self.dragged:
 		return
@@ -120,7 +135,7 @@ func _physics_process(delta):
 		#######################################################
 		STATE_DYING:
 			dying_timer -= delta
-			
+				
 			if dying_timer <=0:
 				# NPC Dead
 				self.state = STATE_DEAD

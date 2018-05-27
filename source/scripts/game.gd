@@ -1,8 +1,8 @@
 extends Node
 
-var sun_set_timer = 3
-var points = 0
-var days = 0 
+var sun_set_timer       = 3.0
+var points              = 0.0
+var days                = 0.0
 const POINTS_TO_HORIZON = 10.0
 
 
