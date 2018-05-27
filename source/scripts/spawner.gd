@@ -6,7 +6,7 @@ var propagation    = 1.0
 var is_propagating = false
 var altar_position = Vector2()
 
-const INITIAL_POPULATION = 300
+const INITIAL_POPULATION = 30
 
 func _ready():
 	altar_position = $"../altar_position".position
