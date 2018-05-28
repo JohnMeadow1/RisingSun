@@ -11,7 +11,7 @@
 [ext_resource path="res://scenes/fire_anim.tscn" type="PackedScene" id=9]
 [ext_resource path="res://sounds/bg-music-383063__reasanka__ukulele-loop-with-vocals-by-rea.wav" type="AudioStream" id=10]
 [ext_resource path="res://fonts/Fairfax.ttf" type="DynamicFontData" id=11]
-[ext_resource path="res://scripts/Label.gd" type="Script" id=12]
+[ext_resource path="res://scripts/label.gd" type="Script" id=12]
 [ext_resource path="res://images/kropla.png" type="Texture" id=13]
 
 [sub_resource type="ParticlesMaterial" id=1]
