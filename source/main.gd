@@ -4,9 +4,8 @@ var  timer = 0.0
 var  timer_change = 1
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
+	$bg_music.play()
+	$bg_music.autoplay = true
 
 func _process(delta):
 #	timer += delta *2 * timer_change

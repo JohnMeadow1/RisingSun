@@ -71,15 +71,17 @@ func _physics_process(delta):
 		
 		if Input.is_action_pressed("move_left_p" + str(PLAYER_NUM)) and position.x > 0:
 			move.x  -= offset;
-			player_moved = true		
-			$Sprite.flip_h = true
+			player_moved    = true
+			$Sprite.flip_h  = true
 			$Sprite2.flip_h = true
+			$shadow.flip_h  = true
 	
 		if Input.is_action_pressed("move_right_p" + str(PLAYER_NUM)) and position.x < get_viewport_rect().size.x:
 			move.x  += offset;
-			player_moved = true
-			$Sprite.flip_h = false 
+			player_moved    = true
+			$Sprite.flip_h  = false 
 			$Sprite2.flip_h = false
+			$shadow.flip_h  = false
 	
 		if player_moved and self.state != STATE_STABING:
 			self.state = STATE_WALK

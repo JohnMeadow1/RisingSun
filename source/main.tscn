@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/sky.tscn" type="PackedScene" id=2]
@@ -9,12 +9,12 @@
 [ext_resource path="res://scenes/players/player1.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scripts/spawner.gd" type="Script" id=8]
 [ext_resource path="res://scenes/fire_anim.tscn" type="PackedScene" id=9]
-[ext_resource path="res://sounds/bg-music-383063__reasanka__ukulele-loop-with-vocals-by-rea.wav" type="AudioStream" id=10]
+[ext_resource path="res://sounds/music.wav" type="AudioStream" id=10]
 [ext_resource path="res://fonts/Fairfax.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://scripts/label.gd" type="Script" id=12]
 [ext_resource path="res://images/kropla.png" type="Texture" id=13]
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=6]
 
 render_priority = 0
 trail_divisor = 1
@@ -52,7 +52,47 @@ anim_speed_random = 0.0
 anim_offset = 0.0
 anim_offset_random = 0.0
 anim_loop = false
-_sections_unfolded = [ "Angle", "Angular Velocity", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Scale", "Spread", "Trail" ]
+_sections_unfolded = [ "Angle", "Angular Velocity", "Animation", "Color", "Damping", "Emission Shape", "Flags", "Gravity", "Hue Variation", "Initial Velocity", "Linear Accel", "Orbit Velocity", "Radial Accel", "Resource", "Scale", "Spread", "Tangential Accel", "Trail" ]
+
+[sub_resource type="ParticlesMaterial" id=7]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 2
+emission_box_extents = Vector3( 1, 50, 1 )
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 0.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 20.0
+initial_velocity_random = 0.2
+angular_velocity = -7.47032e-42
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 180.0
+angle_random = 0.0
+scale = 1.0
+scale_random = 0.5
+color = Color( 1, 1, 1, 1 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Angle", "Angular Velocity", "Animation", "Color", "Damping", "Emission Shape", "Flags", "Gravity", "Hue Variation", "Initial Velocity", "Linear Accel", "Orbit Velocity", "Radial Accel", "Resource", "Scale", "Spread", "Tangential Accel", "Trail" ]
 
 [sub_resource type="DynamicFont" id=2]
 
@@ -86,7 +126,7 @@ use_filter = false
 font_data = ExtResource( 11 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="main" type="Node2D" index="0"]
+[node name="main" type="Node2D"]
 
 scale = Vector2( 3, 3 )
 script = ExtResource( 1 )
@@ -109,11 +149,9 @@ _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index"
 
 [node name="Node2D" type="Node2D" parent="background" index="1"]
 
-editor/display_folded = true
-
 [node name="clouds" type="Particles2D" parent="background/Node2D" index="0"]
 
-position = Vector2( 489.894, 48.8154 )
+position = Vector2( 490, 50 )
 rotation = -3.14159
 emitting = true
 amount = 4
@@ -128,16 +166,16 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 1 )
+process_material = SubResource( 6 )
 texture = ExtResource( 3 )
 normal_map = null
 h_frames = 1
 v_frames = 1
-_sections_unfolded = [ "Process Material", "Textures", "Time", "Transform", "Visibility" ]
+_sections_unfolded = [ "Drawing", "Material", "Process Material", "Textures", "Time", "Transform", "Visibility" ]
 
 [node name="clouds2" type="Particles2D" parent="background/Node2D" index="1"]
 
-position = Vector2( 493.16, 51.0875 )
+position = Vector2( 490, 50 )
 rotation = -3.14159
 emitting = true
 amount = 4
@@ -152,7 +190,7 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 1 )
+process_material = SubResource( 7 )
 texture = ExtResource( 4 )
 normal_map = null
 h_frames = 1
@@ -225,7 +263,6 @@ __meta__ = {
 
 [node name="blood_collisions" type="StaticBody2D" parent="background" index="3"]
 
-editor/display_folded = true
 input_pickable = false
 collision_layer = 4
 collision_mask = 4
@@ -320,15 +357,13 @@ __meta__ = {
 
 position = Vector2( 199.911, 171.072 )
 
-[node name="bgAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="3"]
+[node name="bg_music" type="AudioStreamPlayer" parent="." index="3"]
 
 stream = ExtResource( 10 )
 volume_db = 0.0
-autoplay = true
-max_distance = 2000.0
-attenuation = 1.0
+autoplay = false
+mix_target = 0
 bus = "Master"
-area_mask = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="4"]
 

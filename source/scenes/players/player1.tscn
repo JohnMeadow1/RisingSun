@@ -1,16 +1,17 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/players/player1.gd" type="Script" id=1]
 [ext_resource path="res://images/shaman2.png" type="Texture" id=2]
 [ext_resource path="res://images/decorations2.png" type="Texture" id=3]
-[ext_resource path="res://sounds/pick-up-316423__littlerobotsoundfactory__human-evil-03.wav" type="AudioStream" id=4]
-[ext_resource path="res://sounds/drop-189159__jorickhoofd__first-person-face-punch-1.wav" type="AudioStream" id=5]
+[ext_resource path="res://sounds/pickup.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/drop.wav" type="AudioStream" id=5]
 [ext_resource path="res://sounds/draw.wav" type="AudioStream" id=6]
 [ext_resource path="res://sounds/stab-01.wav" type="AudioStream" id=7]
 [ext_resource path="res://sounds/stab-02.wav" type="AudioStream" id=8]
 [ext_resource path="res://sounds/stab-03.wav" type="AudioStream" id=9]
 [ext_resource path="res://sounds/stab-04.wav" type="AudioStream" id=10]
-[ext_resource path="res://sounds/steps-429796__camilo-vargas13__pasos-gallo.wav" type="AudioStream" id=11]
+[ext_resource path="res://sounds/steps.wav" type="AudioStream" id=11]
+[ext_resource path="res://images/shadow2.png" type="Texture" id=12]
 
 [sub_resource type="Animation" id=1]
 
@@ -239,5 +240,12 @@ max_distance = 2000.0
 attenuation = 1.0
 bus = "Master"
 area_mask = 1
+
+[node name="shadow" type="Sprite" parent="." index="12"]
+
+position = Vector2( 2, 2 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+_sections_unfolded = [ "Offset", "Transform" ]
 
 

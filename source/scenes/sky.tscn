@@ -5,7 +5,7 @@
 [ext_resource path="res://images/nightsky2.png" type="Texture" id=3]
 [ext_resource path="res://images/sunhappy.png" type="Texture" id=4]
 
-[node name="Sun" type="Node2D"]
+[node name="Sun" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -13,13 +13,13 @@ script = ExtResource( 1 )
 
 rotation = -1.5708
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Material", "Transform" ]
 
 [node name="nightsky" type="Sprite" parent="." index="1"]
 
 rotation = -1.5708
 texture = ExtResource( 3 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Material", "Transform" ]
 
 [node name="sun" type="Sprite" parent="." index="2"]
 
@@ -27,6 +27,6 @@ position = Vector2( -150, 0 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 hframes = 2
-_sections_unfolded = [ "Animation", "Offset", "Transform", "Z Index" ]
+_sections_unfolded = [ "Animation", "Material", "Offset", "Transform", "Z Index" ]
 
 
